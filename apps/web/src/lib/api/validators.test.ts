@@ -4,6 +4,8 @@ import test from "node:test";
 import {
   parseCreateGameInput,
   parseMoveInput,
+  parseSettlementIndexerObservationInput,
+  parseSettlementWorkerRunInput,
   parseWalletBindInput,
 } from "./validators";
 
@@ -63,4 +65,24 @@ test("parseMoveInput accepts optional replay-safe requestId", () => {
   });
 
   assert.equal(payload.requestId, "req-123");
+});
+
+test("parseSettlementWorkerRunInput validates retry delay", () => {
+  assert.throws(
+    () => parseSettlementWorkerRunInput({ retryDelayMs: -1 }),
+    /retryDelayMs must be a non-negative integer/
+  );
+  assert.deepEqual(parseSettlementWorkerRunInput({ retryDelayMs: 2000 }), { retryDelayMs: 2000 });
+});
+
+test("parseSettlementIndexerObservationInput validates confirmations", () => {
+  assert.throws(
+    () =>
+      parseSettlementIndexerObservationInput({
+        commitmentHash: "abc",
+        txId: "tx",
+        confirmations: -2,
+      }),
+    /confirmations must be a non-negative integer/
+  );
 });

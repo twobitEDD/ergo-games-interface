@@ -4,6 +4,9 @@ import {
   JoinGameInput,
   MoveInput,
   OnChainPrepareInput,
+  SettlementEnqueueInput,
+  SettlementIndexerObservationInput,
+  SettlementWorkerRunInput,
   WalletBindInput,
 } from "./types";
 
@@ -83,5 +86,39 @@ export const parseOnChainPrepareInput = (value: unknown): OnChainPrepareInput =>
   return {
     gameId: asTrimmed(value.gameId, "gameId"),
     initiatorUserId: asTrimmed(value.initiatorUserId, "initiatorUserId"),
+  };
+};
+
+export const parseSettlementEnqueueInput = (value: unknown): SettlementEnqueueInput => {
+  if (!isObject(value)) throw new Error("body must be an object");
+  return {
+    settlementId: asTrimmed(value.settlementId, "settlementId"),
+  };
+};
+
+export const parseSettlementWorkerRunInput = (value: unknown): SettlementWorkerRunInput => {
+  if (!isObject(value)) throw new Error("body must be an object");
+  const retryDelayMsRaw = value.retryDelayMs;
+  if (retryDelayMsRaw === undefined) return {};
+  if (typeof retryDelayMsRaw !== "number" || !Number.isInteger(retryDelayMsRaw) || retryDelayMsRaw < 0) {
+    throw new Error("retryDelayMs must be a non-negative integer");
+  }
+  return {
+    retryDelayMs: retryDelayMsRaw,
+  };
+};
+
+export const parseSettlementIndexerObservationInput = (
+  value: unknown
+): SettlementIndexerObservationInput => {
+  if (!isObject(value)) throw new Error("body must be an object");
+  const confirmations = value.confirmations;
+  if (typeof confirmations !== "number" || !Number.isInteger(confirmations) || confirmations < 0) {
+    throw new Error("confirmations must be a non-negative integer");
+  }
+  return {
+    commitmentHash: asTrimmed(value.commitmentHash, "commitmentHash"),
+    txId: asTrimmed(value.txId, "txId"),
+    confirmations,
   };
 };

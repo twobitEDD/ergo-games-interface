@@ -19,7 +19,8 @@ const modeCopy: Record<
   SPONSORED_PLAY: {
     label: "Sponsored Play",
     trustLabel: "Trust Label: No-Funds Path",
-    languageNotice: "Off-chain result recording now; gas sponsorship arrives in a later release.",
+    languageNotice:
+      "Off-chain rewards today with optional proof lifecycle scaffold; no wagers and no guaranteed monetary return.",
   },
 };
 

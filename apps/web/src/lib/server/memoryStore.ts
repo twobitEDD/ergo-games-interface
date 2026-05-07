@@ -5,6 +5,12 @@ import {
 } from "@ergo-games/domain";
 
 import { ApiGameMode } from "../api/types";
+import {
+  getSettlementsForUser,
+  registerSettlement,
+  resetSettlementQueueForTests,
+} from "./settlement/settlementQueue";
+import { getRuntimeDecisionInput } from "./settlement/runtimeCapabilities";
 
 type StoredGameEventType = "CREATED" | "JOINED" | "MOVE_APPLIED" | "RESULT_RECORDED";
 
@@ -34,6 +40,7 @@ interface RewardRecord {
   reason: string;
   status: "GRANTED" | "REVOKED";
   capApplied: boolean;
+  settlementId?: string;
   createdAt: string;
 }
 
@@ -144,6 +151,16 @@ const grantReward = (input: {
   const rewards = rewardsByUserId.get(input.userId) ?? [];
   rewards.push(reward);
   rewardsByUserId.set(input.userId, rewards);
+
+  const settlement = registerSettlement({
+    rewardId: reward.id,
+    userId: reward.userId,
+    gameId: reward.gameId,
+    units: reward.units,
+    unitKind: reward.unitKind,
+    decisionInput: getRuntimeDecisionInput(gamesById.get(reward.gameId)?.mode ?? "FREE_PLAY"),
+  });
+  reward.settlementId = settlement.settlementId;
 
   const progression = progressionByUserId.get(input.userId) ?? { xp: 0, credits: 0 };
   if (input.unitKind === "XP") progression.xp += reward.units;
@@ -375,6 +392,8 @@ export const getGameEvents = (gameId: string): StoredGameEvent[] => {
 
 export const getRewardsForUser = (userId: string): RewardRecord[] => [...(rewardsByUserId.get(userId) ?? [])];
 
+export const getSettlementLifecycleForUser = (userId: string) => getSettlementsForUser(userId);
+
 export const getProgressForUser = (userId: string): { xp: number; credits: number } => {
   return progressionByUserId.get(userId) ?? { xp: 0, credits: 0 };
 };
@@ -400,4 +419,5 @@ export const resetMemoryStoreForTests = (): void => {
   intentsById.clear();
   rewardsByUserId.clear();
   progressionByUserId.clear();
+  resetSettlementQueueForTests();
 };

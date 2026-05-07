@@ -32,3 +32,17 @@ export interface OnChainPrepareInput {
   gameId: string;
   initiatorUserId: string;
 }
+
+export interface SettlementEnqueueInput {
+  settlementId: string;
+}
+
+export interface SettlementWorkerRunInput {
+  retryDelayMs?: number;
+}
+
+export interface SettlementIndexerObservationInput {
+  commitmentHash: string;
+  txId: string;
+  confirmations: number;
+}

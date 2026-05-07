@@ -39,6 +39,10 @@ export default function LobbyPage(): JSX.Element {
           <li>Create lobby: `POST /api/games/create` with `mode` set to `FREE_PLAY` or `SPONSORED_PLAY`.</li>
           <li>Join lobby: `POST /api/games/join` with `gameId` and `joinerUserId`.</li>
           <li>Submit moves: `POST /api/games/move` with optional replay-safe `requestId`.</li>
+          <li>
+            Settlement scaffold: queue and status via `POST /api/settlement/enqueue` and `GET
+            /api/settlement/status/[settlementId]`.
+          </li>
           <li>Inspect ledger and progression: `GET /api/games/[gameId]` and `GET /api/rewards/[userId]`.</li>
         </ul>
       </section>
