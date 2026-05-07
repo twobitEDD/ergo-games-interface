@@ -25,6 +25,7 @@ export interface MoveInput {
   gameId: string;
   actorUserId: string;
   cell: number;
+  requestId?: string;
 }
 
 export interface OnChainPrepareInput {

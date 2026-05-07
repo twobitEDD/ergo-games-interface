@@ -16,6 +16,20 @@ test("parseCreateGameInput accepts ON_CHAIN_PLAY mode", () => {
   assert.equal(payload.mode, "ON_CHAIN_PLAY");
 });
 
+test("parseCreateGameInput accepts no-funds mode values", () => {
+  const freePlay = parseCreateGameInput({
+    hostUserId: "user-1",
+    mode: "FREE_PLAY",
+  });
+  const sponsoredPlay = parseCreateGameInput({
+    hostUserId: "user-2",
+    mode: "SPONSORED_PLAY",
+  });
+
+  assert.equal(freePlay.mode, "FREE_PLAY");
+  assert.equal(sponsoredPlay.mode, "SPONSORED_PLAY");
+});
+
 test("parseWalletBindInput rejects unsupported network", () => {
   assert.throws(
     () =>
@@ -38,4 +52,15 @@ test("parseMoveInput requires integer cell", () => {
       }),
     /cell must be an integer/
   );
+});
+
+test("parseMoveInput accepts optional replay-safe requestId", () => {
+  const payload = parseMoveInput({
+    gameId: "game-1",
+    actorUserId: "user-1",
+    cell: 2,
+    requestId: "req-123",
+  });
+
+  assert.equal(payload.requestId, "req-123");
 });

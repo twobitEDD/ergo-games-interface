@@ -1,5 +1,5 @@
 import { parseOnChainPrepareInput } from "../../../../lib/api/validators";
-import { badRequest, notFound, ok, parseJsonBody } from "../../../../lib/server/http";
+import { badRequest, conflict, notFound, ok, parseJsonBody } from "../../../../lib/server/http";
 import { createOnChainIntent, getGame } from "../../../../lib/server/memoryStore";
 
 export async function POST(request: Request): Promise<Response> {
@@ -7,6 +7,9 @@ export async function POST(request: Request): Promise<Response> {
     const payload = parseOnChainPrepareInput(await parseJsonBody(request));
     const game = getGame(payload.gameId);
     if (!game) return notFound("game not found");
+    if (game.mode !== "ON_CHAIN_PLAY") {
+      return conflict("on-chain intent is only available for ON_CHAIN_PLAY mode");
+    }
 
     const intent = createOnChainIntent(payload.gameId);
     return ok({

@@ -65,10 +65,16 @@ export const parseMoveInput = (value: unknown): MoveInput => {
   if (typeof cell !== "number" || !Number.isInteger(cell)) {
     throw new Error("cell must be an integer");
   }
+  const requestIdRaw = value.requestId;
+  let requestId: string | undefined;
+  if (requestIdRaw !== undefined) {
+    requestId = asTrimmed(requestIdRaw, "requestId");
+  }
   return {
     gameId: asTrimmed(value.gameId, "gameId"),
     actorUserId: asTrimmed(value.actorUserId, "actorUserId"),
     cell,
+    requestId,
   };
 };
 

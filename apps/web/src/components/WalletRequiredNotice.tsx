@@ -13,6 +13,10 @@ export function WalletRequiredNotice(): JSX.Element {
         This release does not auto-move funds. Any on-chain action remains explicit, user reviewed, and
         user signed.
       </p>
+      <p style={{ margin: "8px 0 0 0" }}>
+        Free Play and Sponsored Play are no-funds modes with off-chain event recording and non-cash
+        progression.
+      </p>
     </div>
   );
 }
