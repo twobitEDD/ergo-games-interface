@@ -1,0 +1,18 @@
+site_name: Ergo Games Interface Docs
+site_description: Delivery, architecture, and operations documentation for Ergo Games Interface.
+repo_url: https://github.com/twobitedd/ergo-games/tree/main/ergo-games-interface
+docs_dir: docs
+theme:
+  name: mkdocs
+nav:
+  - Home: README.md
+  - Getting Started: getting-started.md
+  - Architecture: architecture.md
+  - Local Development: local-development.md
+  - API Catalog: api-catalog.md
+  - Release Progression: release-progression.md
+  - EKB Integration: ekb-integration.md
+  - Operations Runbook: operations-runbook.md
+  - Compliance Gates: compliance-gates.md
+  - Migration Map: migration-map.md
+  - Releases: releases.md

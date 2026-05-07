@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Local Development - Ergo Games Interface Docs</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Ergo Games Interface Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../getting-started/" class="nav-link">Getting Started</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../architecture/" class="nav-link">Architecture</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Local Development</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../api-catalog/" class="nav-link">API Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../release-progression/" class="nav-link">Release Progression</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../ekb-integration/" class="nav-link">EKB Integration</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../operations-runbook/" class="nav-link">Operations Runbook</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../compliance-gates/" class="nav-link">Compliance Gates</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../migration-map/" class="nav-link">Migration Map</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../releases/" class="nav-link">Releases</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../architecture/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../api-catalog/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/twobitedd/ergo-games/tree/main/ergo-games-interface/edit/master/docs/local-development.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#local-development-workflow" class="nav-link">Local Development Workflow</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#environment-setup" class="nav-link">Environment Setup</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#daily-developer-loop" class="nav-link">Daily Developer Loop</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#current-runnable-commands-verified" class="nav-link">Current Runnable Commands (Verified)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#smoke-workflow-available-today" class="nav-link">Smoke Workflow (Available Today)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#when-you-touch-sensitive-areas" class="nav-link">When You Touch Sensitive Areas</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#definition-of-done-for-local-validation" class="nav-link">Definition of Done for Local Validation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="local-development-workflow">Local Development Workflow</h1>
+<h2 id="environment-setup">Environment Setup</h2>
+<pre><code class="language-bash">cp .env.example .env
+npm install
+</code></pre>
+<p>Key environment defaults in <code>.env.example</code>:
+- <code>NODE_ENV=development</code>
+- <code>ERGO_NETWORK=testnet</code>
+- <code>SPONSORED_SETTLEMENT_ENABLED=false</code></p>
+<h2 id="daily-developer-loop">Daily Developer Loop</h2>
+<ol>
+<li>Sync latest <code>main</code> and create a short-lived branch.</li>
+<li>Implement in the correct workspace boundary (<code>domain</code>, <code>services</code>, <code>db</code>, <code>apps/web</code>).</li>
+<li>Run targeted tests while iterating.</li>
+<li>Run repository validation before PR:</li>
+<li><code>npm run lint</code></li>
+<li><code>npm run test</code></li>
+<li><code>npm run build</code></li>
+<li>or <code>npm run check</code></li>
+<li>Update docs if API, trust semantics, or release gates changed.</li>
+</ol>
+<h2 id="current-runnable-commands-verified">Current Runnable Commands (Verified)</h2>
+<ul>
+<li><code>npm run check</code></li>
+<li>Passes with current repository state.</li>
+<li><code>npm run test</code></li>
+<li>Runs active suites in <code>apps/web</code> and <code>packages/domain</code>.</li>
+<li><code>npm run dev --workspace @ergo-games/web</code></li>
+<li>Currently prints a scaffold notice and exits (no long-running local app server yet).</li>
+</ul>
+<h2 id="smoke-workflow-available-today">Smoke Workflow (Available Today)</h2>
+<p>Use existing API-level tests as executable smoke checks:</p>
+<pre><code class="language-bash">npm run test --workspace @ergo-games/web
+</code></pre>
+<p>What this validates:
+- On-chain intent create/list/update/status flow.
+- Controls toggles for strict confirmation and incident fallback.
+- Settlement queue -&gt; committed -&gt; verified transitions.
+- Validator and in-memory data-path behavior.</p>
+<h2 id="when-you-touch-sensitive-areas">When You Touch Sensitive Areas</h2>
+<ul>
+<li>Wallet, settlement, or contract-related changes require EKB evidence and audits:</li>
+<li>See <code>docs/ekb-integration.md</code>.</li>
+<li>Language or trust notice changes require compliance review:</li>
+<li>See <code>docs/compliance-gates.md</code>.</li>
+</ul>
+<h2 id="definition-of-done-for-local-validation">Definition of Done for Local Validation</h2>
+<ul>
+<li>Repo checks pass (<code>npm run check</code>).</li>
+<li>Relevant workspace tests pass.</li>
+<li>Smoke scenario(s) for touched flows pass.</li>
+<li>Docs updated for operationally meaningful changes.</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

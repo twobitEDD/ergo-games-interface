@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>EKB Integration - Ergo Games Interface Docs</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Ergo Games Interface Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../getting-started/" class="nav-link">Getting Started</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../architecture/" class="nav-link">Architecture</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../local-development/" class="nav-link">Local Development</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../api-catalog/" class="nav-link">API Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../release-progression/" class="nav-link">Release Progression</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">EKB Integration</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../operations-runbook/" class="nav-link">Operations Runbook</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../compliance-gates/" class="nav-link">Compliance Gates</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../migration-map/" class="nav-link">Migration Map</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../releases/" class="nav-link">Releases</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../release-progression/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../operations-runbook/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/twobitedd/ergo-games/tree/main/ergo-games-interface/edit/master/docs/ekb-integration.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#ekb-integration-workflow" class="nav-link">EKB Integration Workflow</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#why-this-exists" class="nav-link">Why This Exists</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#required-ekb-touchpoints" class="nav-link">Required EKB Touchpoints</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#developer-workflow-mandatory" class="nav-link">Developer Workflow (Mandatory)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#integrating-ekb-into-delivery-team-operating-model" class="nav-link">Integrating EKB Into Delivery (Team Operating Model)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#required-pull-request-evidence" class="nav-link">Required Pull Request Evidence</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#merge-checks-required" class="nav-link">Merge Checks (Required)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#pr-template-snippet-recommended" class="nav-link">PR Template Snippet (Recommended)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#release-gate-checklist" class="nav-link">Release Gate Checklist</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#stop-conditions" class="nav-link">Stop Conditions</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#ownership-and-audit-trail-expectations" class="nav-link">Ownership and Audit Trail Expectations</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="ekb-integration-workflow">EKB Integration Workflow</h1>
+<p>This document defines how engineers must use the Ergo Knowledge Base (EKB) workflow during design, implementation, review, and release.</p>
+<h2 id="why-this-exists">Why This Exists</h2>
+<p>EKB usage is a required control for Ergo-facing architecture and contract correctness. It reduces drift, aligns implementations with known patterns, and enforces a repeatable audit trail before production enablement.</p>
+<h2 id="required-ekb-touchpoints">Required EKB Touchpoints</h2>
+<ul>
+<li><code>get_pattern</code>: use during architecture/design decisions (headless dApp shape, transaction-building flow, signature UX).</li>
+<li><code>get_ergoscript_ref</code>: use when writing or modifying ErgoScript and box/value handling logic.</li>
+<li><code>get_eip</code>: use when implementation depends on standards-level behavior or data formats.</li>
+<li><code>get_skill</code>: use when selecting implementation paths for Fleet SDK, Nautilus wallet integration, Babel fees, and AppKit.</li>
+<li><code>audit_contract</code>: first-pass contract review before merge for settlement-related changes.</li>
+<li><code>audit_verify</code>: second-pass verification that confirms audit fixes were applied.</li>
+</ul>
+<h2 id="developer-workflow-mandatory">Developer Workflow (Mandatory)</h2>
+<ol>
+<li>Scope the change and identify whether it impacts wallet flow, settlement flow, or ErgoScript behavior.</li>
+<li>Query EKB (<code>get_pattern</code> / <code>get_skill</code>) before coding architecture-affecting logic.</li>
+<li>Implement with references captured in the pull request description (pattern/ref/EIP links or IDs).</li>
+<li>Run local checks (<code>npm run lint</code>, plus any package-level tests relevant to changed modules).</li>
+<li>For any contract or settlement-path change, run <code>audit_contract</code>.</li>
+<li>Address findings and run <code>audit_verify</code>.</li>
+<li>Do not merge until required checks and release gates in this doc are satisfied.</li>
+</ol>
+<h2 id="integrating-ekb-into-delivery-team-operating-model">Integrating EKB Into Delivery (Team Operating Model)</h2>
+<p>Embed EKB checkpoints into normal delivery cadence, not only late-stage review:</p>
+<ul>
+<li>Backlog refinement:</li>
+<li>Mark stories that touch wallet, settlement, or contract behavior as <code>EKB-required</code>.</li>
+<li>Pre-link expected EKB tools (<code>get_pattern</code>, <code>get_skill</code>, <code>get_eip</code>) before sprint start.</li>
+<li>Design review:</li>
+<li>Confirm architecture decisions with EKB references before coding begins.</li>
+<li>Record chosen pattern and rejected alternatives in design notes or PR draft.</li>
+<li>Implementation:</li>
+<li>Keep EKB references in commit/PR notes as changes are made.</li>
+<li>Re-run relevant EKB queries when assumptions change during development.</li>
+<li>Code review:</li>
+<li>Reviewer must verify references are relevant and still current.</li>
+<li>For contract/settlement changes, reviewer checks two-pass audit evidence.</li>
+<li>Release readiness:</li>
+<li>Gate review confirms EKB evidence is complete and linked to actual shipped behavior.</li>
+</ul>
+<h2 id="required-pull-request-evidence">Required Pull Request Evidence</h2>
+<p>Every settlement- or wallet-related PR must include:</p>
+<ul>
+<li>EKB queries used (tool + topic) and the resulting implementation decision.</li>
+<li>Any ErgoScript/EIP references used for correctness decisions.</li>
+<li>Audit artifact for both passes where applicable (<code>audit_contract</code>, <code>audit_verify</code>).</li>
+<li>Explicit statement of affected release gate(s): Release 1, Release 2, and/or Release 3.</li>
+</ul>
+<h2 id="merge-checks-required">Merge Checks (Required)</h2>
+<ul>
+<li>Scope classification recorded (<code>UI/API only</code>, <code>wallet</code>, <code>settlement</code>, <code>contract</code>).</li>
+<li>EKB references attached for design-affecting decisions.</li>
+<li>Lint and relevant tests pass.</li>
+<li>Two-pass contract audit completed for contract/settlement changes.</li>
+<li>Security/compliance docs updated when boundary behavior changed.</li>
+</ul>
+<h2 id="pr-template-snippet-recommended">PR Template Snippet (Recommended)</h2>
+<p>Use this section in PRs that touch wallet/settlement/contract code:</p>
+<ul>
+<li>Scope classification:</li>
+<li>EKB queries performed:</li>
+<li>Pattern/EIP/ErgoScript references used:</li>
+<li><code>audit_contract</code> artifact:</li>
+<li><code>audit_verify</code> artifact:</li>
+<li>Release gate(s) affected:</li>
+<li>Compliance/trust-language impact:</li>
+</ul>
+<h2 id="release-gate-checklist">Release Gate Checklist</h2>
+<p>Use this checklist before enabling each release phase in production.</p>
+<h3 id="release-1-ergo-native-wallet-play">Release 1: Ergo-Native Wallet Play</h3>
+<ul>
+<li>Wallet-connect and signature UX backed by EKB <code>get_skill</code>/<code>get_pattern</code>.</li>
+<li>Transaction-intent handling reviewed against EKB patterns.</li>
+<li>No production contract path enabled without two-pass audit artifacts.</li>
+<li>Product copy clearly distinguishes intent, submitted, and finalized states.</li>
+</ul>
+<h3 id="release-2-unfunded-participation">Release 2: Unfunded Participation</h3>
+<ul>
+<li>Rule parity validated between wallet and unfunded paths.</li>
+<li>Rewards/progression copy reviewed for no-wager compliance.</li>
+<li>No language implies guaranteed payout, betting, or monetary return.</li>
+<li>Compliance gates in <code>docs/compliance-gates.md</code> reviewed and acknowledged.</li>
+</ul>
+<h3 id="release-3-gasless-server-sponsored-settlement">Release 3: Gasless Server-Sponsored Settlement</h3>
+<ul>
+<li>Sponsored settlement design validated with EKB pattern/skill references.</li>
+<li>Batch/queue/retry behavior reviewed for replay, idempotency, and failure safety.</li>
+<li>Any production ErgoScript path has current two-pass audit evidence.</li>
+<li>Operational rollback and kill switch procedures are documented before launch.</li>
+</ul>
+<h2 id="stop-conditions">Stop Conditions</h2>
+<p>Pause merge or release if any of the following is true:</p>
+<ul>
+<li>EKB evidence is missing for an Ergo-facing architecture decision.</li>
+<li><code>audit_contract</code> findings remain unresolved for production-path code.</li>
+<li><code>audit_verify</code> has not been run after fixes.</li>
+<li>Compliance or incident controls are undefined for a new settlement capability.</li>
+</ul>
+<h2 id="ownership-and-audit-trail-expectations">Ownership and Audit Trail Expectations</h2>
+<ul>
+<li>Feature author owns first-pass EKB query evidence.</li>
+<li>Reviewer owns verification of evidence quality and applicability.</li>
+<li>Release owner owns final gate confirmation and traceability.</li>
+<li>Keep links/IDs in PR metadata so future teams can reconstruct why each Ergo-facing decision was made.</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

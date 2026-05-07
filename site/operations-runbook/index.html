@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Operations Runbook - Ergo Games Interface Docs</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Ergo Games Interface Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../getting-started/" class="nav-link">Getting Started</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../architecture/" class="nav-link">Architecture</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../local-development/" class="nav-link">Local Development</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../api-catalog/" class="nav-link">API Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../release-progression/" class="nav-link">Release Progression</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../ekb-integration/" class="nav-link">EKB Integration</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Operations Runbook</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../compliance-gates/" class="nav-link">Compliance Gates</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../migration-map/" class="nav-link">Migration Map</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../releases/" class="nav-link">Releases</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../ekb-integration/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../compliance-gates/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/twobitedd/ergo-games/tree/main/ergo-games-interface/edit/master/docs/operations-runbook.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#operational-runbook-basics" class="nav-link">Operational Runbook Basics</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#service-surface-current" class="nav-link">Service Surface (Current)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#pre-release-operational-checklist" class="nav-link">Pre-Release Operational Checklist</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#smoke-runbook-local" class="nav-link">Smoke Runbook (Local)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#basic-incident-response" class="nav-link">Basic Incident Response</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#troubleshooting" class="nav-link">Troubleshooting</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="operational-runbook-basics">Operational Runbook Basics</h1>
+<p>This runbook covers baseline operations for local validation, issue triage, and incident-safe behavior.</p>
+<h2 id="service-surface-current">Service Surface (Current)</h2>
+<ul>
+<li>API and app scaffold live in <code>apps/web</code>.</li>
+<li>Runtime state for gameplay, intents, and settlements is currently in-memory.</li>
+<li>Settlement worker and indexer observation endpoints are scaffolds for lifecycle behavior.</li>
+</ul>
+<h2 id="pre-release-operational-checklist">Pre-Release Operational Checklist</h2>
+<ul>
+<li><code>npm run check</code> passes.</li>
+<li>API trust semantics remain explicit (no finality overstatement).</li>
+<li>No-wager language review completed for touched UI/API copy.</li>
+<li>Incident fallback controls reviewed (<code>/api/on-chain/controls</code>).</li>
+<li>Rollback path documented for new behavior.</li>
+</ul>
+<h2 id="smoke-runbook-local">Smoke Runbook (Local)</h2>
+<ol>
+<li>Run test suites:</li>
+<li><code>npm run test</code></li>
+<li>Exercise endpoint smoke suites:</li>
+<li><code>npm run test --workspace @ergo-games/web</code></li>
+<li>Confirm known runtime behavior:</li>
+<li><code>npm run dev --workspace @ergo-games/web</code></li>
+<li>Expected today: scaffold message, no long-running app server.</li>
+</ol>
+<h2 id="basic-incident-response">Basic Incident Response</h2>
+<ul>
+<li>Detect:</li>
+<li>Unexpected lifecycle transitions.</li>
+<li>Rising settlement retries/failures.</li>
+<li>Confirmation drift or reorg-risk trust labels.</li>
+<li>Contain:</li>
+<li>Toggle incident fallback behavior through on-chain controls endpoint.</li>
+<li>Pause lifecycle progression where trust/finality is uncertain.</li>
+<li>Recover:</li>
+<li>Reconcile via status endpoints and indexer observations.</li>
+<li>Re-run worker safely with controlled retry delay.</li>
+<li>Review:</li>
+<li>Record timeline, impacted flows, and remediation steps.</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="npm-install-fails"><code>npm install</code> fails</h3>
+<ul>
+<li>Verify Node/npm versions.</li>
+<li>Delete lockfile artifacts only with team approval.</li>
+<li>Retry install after checking network/proxy settings.</li>
+</ul>
+<h3 id="npm-run-check-fails"><code>npm run check</code> fails</h3>
+<ul>
+<li>Run <code>npm run lint</code>, <code>npm run test</code>, and <code>npm run build</code> separately to isolate failing workspace.</li>
+<li>For test failures, run failing workspace tests directly.</li>
+</ul>
+<h3 id="web-dev-command-does-not-start-a-server">Web <code>dev</code> command does not start a server</h3>
+<ul>
+<li>This is currently expected behavior (<code>TODO: initialize Next.js app</code>).</li>
+<li>Use endpoint-level tests as primary local smoke validation until runtime server setup is added.</li>
+</ul>
+<h3 id="settlement-does-not-verify">Settlement does not verify</h3>
+<ul>
+<li>Check whether settlement rail is sponsored-eligible.</li>
+<li>Confirm worker was run and commitment hash exists.</li>
+<li>Confirm indexer observation includes matching commitment hash and sufficient confirmations.</li>
+</ul>
+<h3 id="intent-status-appears-provisional-for-too-long">Intent status appears provisional for too long</h3>
+<ul>
+<li>Verify confirmation depth controls.</li>
+<li>Check for reorg risk conditions and max observed confirmation drift.</li>
+<li>Use strict vs optimistic control settings deliberately during incident handling.</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

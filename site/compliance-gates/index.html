@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Compliance Gates - Ergo Games Interface Docs</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Ergo Games Interface Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../getting-started/" class="nav-link">Getting Started</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../architecture/" class="nav-link">Architecture</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../local-development/" class="nav-link">Local Development</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../api-catalog/" class="nav-link">API Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../release-progression/" class="nav-link">Release Progression</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../ekb-integration/" class="nav-link">EKB Integration</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../operations-runbook/" class="nav-link">Operations Runbook</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Compliance Gates</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../migration-map/" class="nav-link">Migration Map</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../releases/" class="nav-link">Releases</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../operations-runbook/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../migration-map/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/twobitedd/ergo-games/tree/main/ergo-games-interface/edit/master/docs/compliance-gates.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#compliance-gates-and-boundaries" class="nav-link">Compliance Gates and Boundaries</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#core-compliance-position" class="nav-link">Core Compliance Position</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#no-wager-product-boundaries" class="nav-link">No-Wager Product Boundaries</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#prohibited-language-product-marketing-support" class="nav-link">Prohibited Language (Product + Marketing + Support)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#release-gono-go-criteria" class="nav-link">Release Go/No-Go Criteria</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#incident-controls" class="nav-link">Incident Controls</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#release-decision-process" class="nav-link">Release Decision Process</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="compliance-gates-and-boundaries">Compliance Gates and Boundaries</h1>
+<p>This document defines mandatory no-wager boundaries, language constraints, release go/no-go criteria, and incident controls for Ergo Games Interface.</p>
+<h2 id="core-compliance-position">Core Compliance Position</h2>
+<ul>
+<li>Default operating mode is <strong>no-wager</strong> across all releases.</li>
+<li>Gameplay outcomes and rewards must not represent gambling, staking, or speculative return.</li>
+<li>User-facing messaging must prioritize skill/gameplay framing and avoid payout framing.</li>
+</ul>
+<h2 id="no-wager-product-boundaries">No-Wager Product Boundaries</h2>
+<p>The following boundaries are mandatory unless legal approval explicitly changes project policy:</p>
+<ul>
+<li>No betting mechanics (no wagers placed on outcomes).</li>
+<li>No pooled stake or prize pool funded by participant losses.</li>
+<li>No guaranteed monetary return promises from gameplay.</li>
+<li>No chance-based payout framing that resembles casino-style outcomes.</li>
+<li>No direct conversion claims from in-product progression points to cash value.</li>
+</ul>
+<h2 id="prohibited-language-product-marketing-support">Prohibited Language (Product + Marketing + Support)</h2>
+<p>Do not use copy that implies wagering or financial yield. Prohibited examples:</p>
+<ul>
+<li>"Bet", "wager", "stake your funds", "jackpot", "odds", "casino-style".</li>
+<li>"Guaranteed payout", "risk-free profit", "earn yield", "double your money".</li>
+<li>"Win real money every game", "cash prize from entry pool".</li>
+</ul>
+<p>Use neutral alternatives such as:</p>
+<ul>
+<li>"Play mode", "match result", "reward eligibility", "verification status".</li>
+<li>"On-chain confirmation", "sponsored settlement", "off-chain progression".</li>
+</ul>
+<h2 id="release-gono-go-criteria">Release Go/No-Go Criteria</h2>
+<p>A release is <strong>NO-GO</strong> if any required control is missing.</p>
+<h3 id="universal-gates-all-releases">Universal Gates (All Releases)</h3>
+<ul>
+<li>Compliance language review completed for UI copy, docs, and release notes.</li>
+<li>Security/compliance documentation updated for newly introduced behavior.</li>
+<li>Incident response owner assigned and on-call escalation path documented.</li>
+<li>Rollback strategy defined for newly enabled user-facing features.</li>
+</ul>
+<h3 id="release-1-ergo-native-wallet-play">Release 1: Ergo-Native Wallet Play</h3>
+<ul>
+<li>Wallet-connected flow does not imply guaranteed monetary outcomes.</li>
+<li>Transaction state labels avoid finality misrepresentation.</li>
+<li>Security review confirms no unsafe default signing behavior.</li>
+</ul>
+<h3 id="release-2-unfunded-participation">Release 2: Unfunded Participation</h3>
+<ul>
+<li>Off-chain progression path has explicit non-cash framing.</li>
+<li>Rewards system copy avoids payout or investment framing.</li>
+<li>Abuse controls and rate limits are in place for progression endpoints.</li>
+</ul>
+<h3 id="release-3-gasless-server-sponsored-settlement">Release 3: Gasless Server-Sponsored Settlement</h3>
+<ul>
+<li>Sponsored settlement policy documented (eligibility, limits, refusal conditions).</li>
+<li>Batch and retry controls validated with explicit failure handling.</li>
+<li>Kill switch tested to disable sponsored settlement without disabling core gameplay.</li>
+<li>Incident runbook includes chain event delays, replay anomalies, and confirmation drift.</li>
+</ul>
+<h2 id="incident-controls">Incident Controls</h2>
+<p>The team must maintain the following controls before production rollout of settlement features:</p>
+<ul>
+<li><strong>Kill switch:</strong> immediate disablement of sponsored settlement paths.</li>
+<li><strong>Mode fallback:</strong> automatic downgrade to off-chain-only mode on critical failures.</li>
+<li><strong>Auditability:</strong> immutable event trail for settlement intent, processing, and verification.</li>
+<li><strong>Escalation:</strong> severity matrix with response SLAs and ownership.</li>
+<li><strong>Post-incident review:</strong> mandatory RCA with remediation actions and follow-up verification.</li>
+</ul>
+<h2 id="release-decision-process">Release Decision Process</h2>
+<p>Before each release:</p>
+<ol>
+<li>Run gate review using this document and <code>docs/releases.md</code>.</li>
+<li>Record pass/fail status for each gate and owner sign-off.</li>
+<li>If any gate fails, classify release as NO-GO and track remediation tasks.</li>
+<li>Re-run gate review after remediation before promoting to production.</li>
+</ol></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -25,6 +25,25 @@ EKB usage is a required control for Ergo-facing architecture and contract correc
 6. Address findings and run `audit_verify`.
 7. Do not merge until required checks and release gates in this doc are satisfied.
 
+## Integrating EKB Into Delivery (Team Operating Model)
+
+Embed EKB checkpoints into normal delivery cadence, not only late-stage review:
+
+- Backlog refinement:
+  - Mark stories that touch wallet, settlement, or contract behavior as `EKB-required`.
+  - Pre-link expected EKB tools (`get_pattern`, `get_skill`, `get_eip`) before sprint start.
+- Design review:
+  - Confirm architecture decisions with EKB references before coding begins.
+  - Record chosen pattern and rejected alternatives in design notes or PR draft.
+- Implementation:
+  - Keep EKB references in commit/PR notes as changes are made.
+  - Re-run relevant EKB queries when assumptions change during development.
+- Code review:
+  - Reviewer must verify references are relevant and still current.
+  - For contract/settlement changes, reviewer checks two-pass audit evidence.
+- Release readiness:
+  - Gate review confirms EKB evidence is complete and linked to actual shipped behavior.
+
 ## Required Pull Request Evidence
 
 Every settlement- or wallet-related PR must include:
@@ -41,6 +60,18 @@ Every settlement- or wallet-related PR must include:
 - Lint and relevant tests pass.
 - Two-pass contract audit completed for contract/settlement changes.
 - Security/compliance docs updated when boundary behavior changed.
+
+## PR Template Snippet (Recommended)
+
+Use this section in PRs that touch wallet/settlement/contract code:
+
+- Scope classification:
+- EKB queries performed:
+- Pattern/EIP/ErgoScript references used:
+- `audit_contract` artifact:
+- `audit_verify` artifact:
+- Release gate(s) affected:
+- Compliance/trust-language impact:
 
 ## Release Gate Checklist
 
@@ -75,3 +106,10 @@ Pause merge or release if any of the following is true:
 - `audit_contract` findings remain unresolved for production-path code.
 - `audit_verify` has not been run after fixes.
 - Compliance or incident controls are undefined for a new settlement capability.
+
+## Ownership and Audit Trail Expectations
+
+- Feature author owns first-pass EKB query evidence.
+- Reviewer owns verification of evidence quality and applicability.
+- Release owner owns final gate confirmation and traceability.
+- Keep links/IDs in PR metadata so future teams can reconstruct why each Ergo-facing decision was made.
