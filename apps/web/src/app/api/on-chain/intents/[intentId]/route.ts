@@ -9,11 +9,8 @@ export async function GET(
   if (!intent) return notFound("intent not found");
 
   return ok({
-    intentId: intent.id,
-    status: intent.status,
-    finality: intent.finality,
-    controls: intent.controls,
+    intent,
     trustNotice:
-      "Status reflects a no-wager lifecycle signal. Finality is trust-labeled and not treated as final before the configured threshold.",
+      "Intent status reports are lifecycle signals only. They do not represent wagering outcomes or guaranteed monetary return.",
   });
 }

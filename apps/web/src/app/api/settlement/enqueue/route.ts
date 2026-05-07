@@ -1,12 +1,12 @@
-import { parseSettlementEnqueueInput } from "../../../../../lib/api/validators";
+import { parseSettlementEnqueueInput } from "../../../../lib/api/validators";
 import {
   badRequest,
   conflict,
   notFound,
   ok,
   parseJsonBody,
-} from "../../../../../lib/server/http";
-import { enqueueSettlement, getSettlement } from "../../../../../lib/server/settlement/settlementQueue";
+} from "../../../../lib/server/http";
+import { enqueueSettlement, getSettlement } from "../../../../lib/server/settlement/settlementQueue";
 
 export async function POST(request: Request): Promise<Response> {
   try {

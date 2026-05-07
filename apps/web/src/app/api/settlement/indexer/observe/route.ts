@@ -1,9 +1,9 @@
-import { parseSettlementIndexerObservationInput } from "../../../../../../lib/api/validators";
-import { badRequest, ok, parseJsonBody } from "../../../../../../lib/server/http";
+import { parseSettlementIndexerObservationInput } from "../../../../../lib/api/validators";
+import { badRequest, ok, parseJsonBody } from "../../../../../lib/server/http";
 import {
   reconcileIndexerObservations,
   recordIndexerObservation,
-} from "../../../../../../lib/server/settlement/settlementQueue";
+} from "../../../../../lib/server/settlement/settlementQueue";
 
 export async function POST(request: Request): Promise<Response> {
   try {

@@ -52,7 +52,48 @@ export default function LobbyPage(): JSX.Element {
         <TicTacToeBoard board={demoBoard} />
       </section>
 
-      <TxIntentPlaceholder intentStatus="PREPARED" />
+      <section
+        style={{
+          border: "1px solid #bbf7d0",
+          borderRadius: 8,
+          padding: 12,
+          background: "#f0fdf4",
+        }}
+      >
+        <h2 style={{ marginTop: 0 }}>Funded UX Acceleration Layer</h2>
+        <p style={{ margin: "8px 0" }}>
+          Lifecycle visibility now includes provisional safety markers, confidence meter tracking, and recovery
+          friendly pending actions. Finality is never presented as final before confirmation threshold depth.
+        </p>
+        <ul style={{ margin: 0, paddingInlineStart: 20 }}>
+          <li>Create/list intents: `POST/GET /api/on-chain/intents`.</li>
+          <li>Update lifecycle: `POST /api/on-chain/intents/[intentId]/status`.</li>
+          <li>Read intent status: `GET /api/on-chain/intents/[intentId]`.</li>
+          <li>Adjust controls: `GET/POST /api/on-chain/controls`.</li>
+        </ul>
+      </section>
+
+      <TxIntentPlaceholder
+        intentId="intent_000001"
+        gameId="game_demo_001"
+        settlementId="stl_000001"
+        intentStatus="CONFIRMED"
+        trustLabel="PROVISIONAL_CHAIN_SIGNAL"
+        confidencePercent={67}
+        observedConfirmations={2}
+        requiredDepth={3}
+        provisional
+        pendingActions={[
+          "Resume pending intent checks after refresh via GET /api/on-chain/intents?pendingOnly=true&includeRecovery=true",
+          "Wait for additional confirmation before treating state as final",
+          "Escalate to incident fallback toggle if reorg risk appears",
+        ]}
+        controls={{
+          strictConfirmationMode: false,
+          optimisticMode: true,
+          incidentFallbackToOffChain: false,
+        }}
+      />
     </main>
   );
 }

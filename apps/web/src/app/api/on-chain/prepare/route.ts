@@ -11,12 +11,18 @@ export async function POST(request: Request): Promise<Response> {
       return conflict("on-chain intent is only available for ON_CHAIN_PLAY mode");
     }
 
-    const intent = createOnChainIntent(payload.gameId);
+    const intent = createOnChainIntent({
+      gameId: payload.gameId,
+      initiatorUserId: payload.initiatorUserId,
+      idempotencyKey:
+        payload.idempotencyKey ?? `${payload.gameId}:${payload.initiatorUserId}:prepared-intent`,
+      settlementId: payload.settlementId,
+    });
     return ok({
       gameId: game.id,
       intent,
       trustNotice:
-        "Prepare endpoint is a release-1 scaffold. It does not submit or automate on-chain value transfer.",
+        "Prepare endpoint creates an idempotent intent lifecycle scaffold. Finality remains provisional until configured confirmation depth is met.",
     });
   } catch (error) {
     return badRequest(error instanceof Error ? error.message : "invalid request");

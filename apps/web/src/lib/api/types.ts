@@ -31,6 +31,41 @@ export interface MoveInput {
 export interface OnChainPrepareInput {
   gameId: string;
   initiatorUserId: string;
+  idempotencyKey?: string;
+  settlementId?: string;
+}
+
+export type ApiTxIntentStatus =
+  | "PREPARED"
+  | "SIGNED"
+  | "SUBMITTED"
+  | "MEMPOOL_SEEN"
+  | "CONFIRMED"
+  | "FINALIZED"
+  | "FAILED"
+  | "REPLACED";
+
+export interface TxIntentCreateInput {
+  gameId: string;
+  initiatorUserId: string;
+  idempotencyKey: string;
+  settlementId?: string;
+}
+
+export interface TxIntentUpdateInput {
+  status: ApiTxIntentStatus;
+  txId?: string;
+  confirmations?: number;
+  note?: string;
+  replacementIntentId?: string;
+  failureReason?: string;
+}
+
+export interface TxIntentControlsUpdateInput {
+  strictConfirmationMode?: boolean;
+  optimisticMode?: boolean;
+  incidentFallbackToOffChain?: boolean;
+  confirmationDepth?: number;
 }
 
 export interface SettlementEnqueueInput {

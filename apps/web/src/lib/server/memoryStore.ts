@@ -10,7 +10,19 @@ import {
   registerSettlement,
   resetSettlementQueueForTests,
 } from "./settlement/settlementQueue";
+import { decideSettlementRail } from "./settlement/decisionService";
 import { getRuntimeDecisionInput } from "./settlement/runtimeCapabilities";
+import {
+  createIntent,
+  getIntent,
+  getIntentControls,
+  listIntents,
+  recoverPendingIntents,
+  resetIntentServiceForTests,
+  updateIntent,
+  updateIntentControls,
+} from "./intent/intentService";
+import type { TxIntentLifecycleStatus, TxIntentView } from "./intent/types";
 
 type StoredGameEventType = "CREATED" | "JOINED" | "MOVE_APPLIED" | "RESULT_RECORDED";
 
@@ -58,17 +70,9 @@ interface GameRecord {
 
 type PublicGameRecord = Omit<GameRecord, "appliedRequestIds" | "rewardsIssued">;
 
-interface TxIntentRecord {
-  id: string;
-  gameId: string;
-  status: "PREPARED" | "WAITING_FOR_SIGNATURE" | "CONFIRMED";
-  trustNotice: string;
-}
-
 const usersByExternalAuth = new Map<string, UserRecord>();
 const usersById = new Map<string, UserRecord>();
 const gamesById = new Map<string, GameRecord>();
-const intentsById = new Map<string, TxIntentRecord>();
 const rewardsByUserId = new Map<string, RewardRecord[]>();
 const progressionByUserId = new Map<string, { xp: number; credits: number }>();
 
@@ -84,14 +88,10 @@ const trustNoticeByMode: Record<ApiGameMode, string> = {
   FREE_PLAY:
     "No-funds Free Play: off-chain authoritative event trail plus non-cash progression only.",
   SPONSORED_PLAY:
-    "No-funds Sponsored Play: off-chain authoritative event trail with non-cash progression. Server gas sponsorship is not enabled in this release.",
+    "No-funds Sponsored Play: progression starts off-chain with optional proof lifecycle scaffolding. Wagers and payout guarantees remain disabled.",
 };
-
-const modeSettlementRail: Record<ApiGameMode, "OFF_CHAIN_ONLY" | "USER_SIGNED_ON_CHAIN"> = {
-  ON_CHAIN_PLAY: "USER_SIGNED_ON_CHAIN",
-  FREE_PLAY: "OFF_CHAIN_ONLY",
-  SPONSORED_PLAY: "OFF_CHAIN_ONLY",
-};
+const settlementRailForMode = (mode: ApiGameMode) =>
+  decideSettlementRail(getRuntimeDecisionInput(mode)).rail;
 
 const nowIso = (): string => new Date().toISOString();
 
@@ -291,7 +291,7 @@ export const createGame = (hostUserId: string, mode: ApiGameMode): GameRecord =>
     payload: {
       hostUserId,
       mode,
-      settlementRail: modeSettlementRail[mode],
+      settlementRail: settlementRailForMode(mode),
       trustNotice: trustNoticeByMode[mode],
     },
   });
@@ -398,26 +398,57 @@ export const getProgressForUser = (userId: string): { xp: number; credits: numbe
   return progressionByUserId.get(userId) ?? { xp: 0, credits: 0 };
 };
 
-export const createOnChainIntent = (gameId: string): TxIntentRecord => {
-  const intent: TxIntentRecord = {
-    id: generateId("intent"),
-    gameId,
-    status: "PREPARED",
-    trustNotice:
-      "Transaction intent scaffold only. No automated value transfer is executed in this release.",
-  };
-  intentsById.set(intent.id, intent);
-  return intent;
+export const createOnChainIntent = (input: {
+  gameId: string;
+  initiatorUserId: string;
+  idempotencyKey: string;
+  settlementId?: string;
+}): TxIntentView => {
+  return createIntent(input);
 };
 
-export const getOnChainIntent = (intentId: string): TxIntentRecord | undefined => intentsById.get(intentId);
+export const updateOnChainIntent = (input: {
+  intentId: string;
+  status: TxIntentLifecycleStatus;
+  txId?: string;
+  confirmations?: number;
+  note?: string;
+  replacementIntentId?: string;
+  failureReason?: string;
+}) => updateIntent(input);
+
+export const getOnChainIntent = (intentId: string): TxIntentView | undefined => getIntent(intentId);
+
+export const listOnChainIntents = (input?: {
+  gameId?: string;
+  settlementId?: string;
+  status?: TxIntentLifecycleStatus;
+  onlyPending?: boolean;
+}) => listIntents(input);
+
+export const recoverOnChainPendingIntents = () => recoverPendingIntents();
+
+export const getOnChainIntentControls = () => getIntentControls();
+
+export const updateOnChainIntentControls = (input: {
+  strictConfirmationMode?: boolean;
+  optimisticMode?: boolean;
+  incidentFallbackToOffChain?: boolean;
+  confirmationDepth?: number;
+}) =>
+  updateIntentControls({
+    strictConfirmationMode: input.strictConfirmationMode,
+    optimisticMode: input.optimisticMode,
+    incidentFallbackToOffChain: input.incidentFallbackToOffChain,
+    confirmationDepth: input.confirmationDepth,
+  });
 
 export const resetMemoryStoreForTests = (): void => {
   usersByExternalAuth.clear();
   usersById.clear();
   gamesById.clear();
-  intentsById.clear();
   rewardsByUserId.clear();
   progressionByUserId.clear();
   resetSettlementQueueForTests();
+  resetIntentServiceForTests();
 };

@@ -101,7 +101,7 @@ export const enqueueSettlement = (
 export const runSettlementWorker = (
   input?: { retryDelayMs?: number; windowStartedAt?: string; windowClosedAt?: string }
 ): WorkerRunResult => {
-  const retryDelayMs = Math.max(1000, input?.retryDelayMs ?? 5000);
+  const retryDelayMs = Math.max(0, input?.retryDelayMs ?? 5000);
   const now = Date.now();
   const candidates = [...recordsById.values()].filter((record) => {
     if (record.decision.rail !== "SERVER_SPONSORED_ON_CHAIN") return false;

@@ -1,6 +1,6 @@
-import { parseSettlementWorkerRunInput } from "../../../../../../lib/api/validators";
-import { badRequest, ok, parseJsonBody } from "../../../../../../lib/server/http";
-import { runSettlementWorker } from "../../../../../../lib/server/settlement/settlementQueue";
+import { parseSettlementWorkerRunInput } from "../../../../../lib/api/validators";
+import { badRequest, ok, parseJsonBody } from "../../../../../lib/server/http";
+import { runSettlementWorker } from "../../../../../lib/server/settlement/settlementQueue";
 
 export async function POST(request: Request): Promise<Response> {
   try {

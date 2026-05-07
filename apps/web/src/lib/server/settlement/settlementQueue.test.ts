@@ -100,13 +100,13 @@ test("queue worker retries and fails after max attempts", () => {
     },
   });
 
-  const firstRun = runSettlementWorker({ retryDelayMs: 1 });
+  const firstRun = runSettlementWorker({ retryDelayMs: 0 });
   assert.equal(firstRun.retryScheduledSettlementIds.includes(settlement.settlementId), true);
   const firstState = getSettlement(settlement.settlementId);
   assert.equal(firstState?.queueStatus, "RETRY_SCHEDULED");
   assert.equal(firstState?.lifecycleStatus, "PROOF_PENDING");
 
-  const secondRun = runSettlementWorker({ retryDelayMs: 1 });
+  const secondRun = runSettlementWorker({ retryDelayMs: 0 });
   assert.equal(secondRun.failedSettlementIds.includes(settlement.settlementId), true);
   const failedState = getSettlement(settlement.settlementId);
   assert.equal(failedState?.queueStatus, "FAILED");

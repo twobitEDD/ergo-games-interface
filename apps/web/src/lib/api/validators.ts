@@ -1,4 +1,5 @@
 import {
+  ApiTxIntentStatus,
   AuthSyncInput,
   CreateGameInput,
   JoinGameInput,
@@ -7,6 +8,9 @@ import {
   SettlementEnqueueInput,
   SettlementIndexerObservationInput,
   SettlementWorkerRunInput,
+  TxIntentControlsUpdateInput,
+  TxIntentCreateInput,
+  TxIntentUpdateInput,
   WalletBindInput,
 } from "./types";
 
@@ -83,10 +87,116 @@ export const parseMoveInput = (value: unknown): MoveInput => {
 
 export const parseOnChainPrepareInput = (value: unknown): OnChainPrepareInput => {
   if (!isObject(value)) throw new Error("body must be an object");
+  const idempotencyKeyRaw = value.idempotencyKey;
+  const settlementIdRaw = value.settlementId;
   return {
     gameId: asTrimmed(value.gameId, "gameId"),
     initiatorUserId: asTrimmed(value.initiatorUserId, "initiatorUserId"),
+    idempotencyKey:
+      typeof idempotencyKeyRaw === "string" && idempotencyKeyRaw.trim().length > 0
+        ? idempotencyKeyRaw.trim()
+        : undefined,
+    settlementId:
+      typeof settlementIdRaw === "string" && settlementIdRaw.trim().length > 0
+        ? settlementIdRaw.trim()
+        : undefined,
   };
+};
+
+const parseIntentStatus = (value: unknown): ApiTxIntentStatus => {
+  const status = asTrimmed(value, "status");
+  const allowed: ApiTxIntentStatus[] = [
+    "PREPARED",
+    "SIGNED",
+    "SUBMITTED",
+    "MEMPOOL_SEEN",
+    "CONFIRMED",
+    "FINALIZED",
+    "FAILED",
+    "REPLACED",
+  ];
+  if (!allowed.includes(status as ApiTxIntentStatus)) {
+    throw new Error("status must be a valid tx intent lifecycle status");
+  }
+  return status as ApiTxIntentStatus;
+};
+
+export const parseTxIntentCreateInput = (value: unknown): TxIntentCreateInput => {
+  if (!isObject(value)) throw new Error("body must be an object");
+  const settlementIdRaw = value.settlementId;
+  return {
+    gameId: asTrimmed(value.gameId, "gameId"),
+    initiatorUserId: asTrimmed(value.initiatorUserId, "initiatorUserId"),
+    idempotencyKey: asTrimmed(value.idempotencyKey, "idempotencyKey"),
+    settlementId:
+      typeof settlementIdRaw === "string" && settlementIdRaw.trim().length > 0
+        ? settlementIdRaw.trim()
+        : undefined,
+  };
+};
+
+export const parseTxIntentUpdateInput = (value: unknown): TxIntentUpdateInput => {
+  if (!isObject(value)) throw new Error("body must be an object");
+  const txIdRaw = value.txId;
+  const noteRaw = value.note;
+  const replacementIntentIdRaw = value.replacementIntentId;
+  const failureReasonRaw = value.failureReason;
+  const confirmationsRaw = value.confirmations;
+  let confirmations: number | undefined;
+  if (confirmationsRaw !== undefined) {
+    if (typeof confirmationsRaw !== "number" || !Number.isInteger(confirmationsRaw) || confirmationsRaw < 0) {
+      throw new Error("confirmations must be a non-negative integer");
+    }
+    confirmations = confirmationsRaw;
+  }
+  return {
+    status: parseIntentStatus(value.status),
+    txId: typeof txIdRaw === "string" && txIdRaw.trim().length > 0 ? txIdRaw.trim() : undefined,
+    confirmations,
+    note: typeof noteRaw === "string" && noteRaw.trim().length > 0 ? noteRaw.trim() : undefined,
+    replacementIntentId:
+      typeof replacementIntentIdRaw === "string" && replacementIntentIdRaw.trim().length > 0
+        ? replacementIntentIdRaw.trim()
+        : undefined,
+    failureReason:
+      typeof failureReasonRaw === "string" && failureReasonRaw.trim().length > 0
+        ? failureReasonRaw.trim()
+        : undefined,
+  };
+};
+
+export const parseTxIntentControlsUpdateInput = (value: unknown): TxIntentControlsUpdateInput => {
+  if (!isObject(value)) throw new Error("body must be an object");
+  const output: TxIntentControlsUpdateInput = {};
+  if (value.strictConfirmationMode !== undefined) {
+    if (typeof value.strictConfirmationMode !== "boolean") {
+      throw new Error("strictConfirmationMode must be a boolean");
+    }
+    output.strictConfirmationMode = value.strictConfirmationMode;
+  }
+  if (value.optimisticMode !== undefined) {
+    if (typeof value.optimisticMode !== "boolean") {
+      throw new Error("optimisticMode must be a boolean");
+    }
+    output.optimisticMode = value.optimisticMode;
+  }
+  if (value.incidentFallbackToOffChain !== undefined) {
+    if (typeof value.incidentFallbackToOffChain !== "boolean") {
+      throw new Error("incidentFallbackToOffChain must be a boolean");
+    }
+    output.incidentFallbackToOffChain = value.incidentFallbackToOffChain;
+  }
+  if (value.confirmationDepth !== undefined) {
+    if (
+      typeof value.confirmationDepth !== "number" ||
+      !Number.isInteger(value.confirmationDepth) ||
+      value.confirmationDepth < 1
+    ) {
+      throw new Error("confirmationDepth must be a positive integer");
+    }
+    output.confirmationDepth = value.confirmationDepth;
+  }
+  return output;
 };
 
 export const parseSettlementEnqueueInput = (value: unknown): SettlementEnqueueInput => {

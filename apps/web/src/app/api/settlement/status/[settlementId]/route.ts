@@ -1,5 +1,5 @@
-import { notFound, ok } from "../../../../../../lib/server/http";
-import { getSettlement } from "../../../../../../lib/server/settlement/settlementQueue";
+import { notFound, ok } from "../../../../../lib/server/http";
+import { getSettlement } from "../../../../../lib/server/settlement/settlementQueue";
 
 export async function GET(
   _request: Request,

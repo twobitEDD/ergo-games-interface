@@ -6,6 +6,9 @@ import {
   parseMoveInput,
   parseSettlementIndexerObservationInput,
   parseSettlementWorkerRunInput,
+  parseTxIntentControlsUpdateInput,
+  parseTxIntentCreateInput,
+  parseTxIntentUpdateInput,
   parseWalletBindInput,
 } from "./validators";
 
@@ -84,5 +87,40 @@ test("parseSettlementIndexerObservationInput validates confirmations", () => {
         confirmations: -2,
       }),
     /confirmations must be a non-negative integer/
+  );
+});
+
+test("parseTxIntentCreateInput requires idempotency key", () => {
+  const payload = parseTxIntentCreateInput({
+    gameId: "game-1",
+    initiatorUserId: "user-1",
+    idempotencyKey: "idem-1",
+  });
+  assert.equal(payload.idempotencyKey, "idem-1");
+});
+
+test("parseTxIntentUpdateInput validates lifecycle status and confirmations", () => {
+  assert.throws(
+    () =>
+      parseTxIntentUpdateInput({
+        status: "UNKNOWN",
+      }),
+    /status must be a valid tx intent lifecycle status/
+  );
+  const payload = parseTxIntentUpdateInput({
+    status: "CONFIRMED",
+    confirmations: 2,
+  });
+  assert.equal(payload.status, "CONFIRMED");
+  assert.equal(payload.confirmations, 2);
+});
+
+test("parseTxIntentControlsUpdateInput validates numeric depth", () => {
+  assert.throws(
+    () =>
+      parseTxIntentControlsUpdateInput({
+        confirmationDepth: 0,
+      }),
+    /confirmationDepth must be a positive integer/
   );
 });
