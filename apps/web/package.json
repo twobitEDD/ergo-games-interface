@@ -2,10 +2,13 @@
   "name": "@ergo-games/web",
   "version": "0.1.0",
   "private": true,
+  "dependencies": {
+    "@ergo-games/domain": "0.1.0"
+  },
   "scripts": {
     "dev": "echo \"TODO: initialize Next.js app\"",
     "build": "echo \"web build placeholder\"",
     "lint": "echo \"web lint placeholder\"",
-    "test": "echo \"web test placeholder\""
+    "test": "node --import tsx --test src/**/*.test.ts"
   }
 }

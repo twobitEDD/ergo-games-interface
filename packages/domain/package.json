@@ -6,6 +6,6 @@
   "scripts": {
     "build": "echo \"domain build placeholder\"",
     "lint": "echo \"domain lint placeholder\"",
-    "test": "echo \"domain test placeholder\""
+    "test": "node --import tsx --test src/**/*.test.ts"
   }
 }

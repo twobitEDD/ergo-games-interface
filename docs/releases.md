@@ -16,3 +16,8 @@ This document tracks acceptance criteria and readiness checks per release increm
 - API/UI behavior tested.
 - Security/compliance notes updated.
 - Operational readiness verified.
+
+## Gate References
+
+- `docs/ekb-integration.md`: required EKB-backed workflow and contract audit checks.
+- `docs/compliance-gates.md`: no-wager boundaries, prohibited language, and release go/no-go controls.

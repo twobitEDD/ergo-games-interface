@@ -35,3 +35,9 @@ Ergo Games Interface is a monorepo for building game experiences with a shared p
 ## Contribution
 
 See `CONTRIBUTING.md` for workflow and expectations.
+
+## Key Delivery Docs
+
+- `docs/releases.md`: release sequence and gate checklist template
+- `docs/ekb-integration.md`: mandatory EKB workflow and required pre-merge/release checks
+- `docs/compliance-gates.md`: no-wager boundaries, go/no-go controls, and incident safeguards
