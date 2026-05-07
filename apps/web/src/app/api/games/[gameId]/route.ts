@@ -10,9 +10,10 @@ import {
 
 export async function GET(
   request: Request,
-  context: { params: { gameId: string } }
+  context: { params: Promise<{ gameId: string }> }
 ): Promise<Response> {
-  const game = getGame(context.params.gameId);
+  const { gameId } = await context.params;
+  const game = getGame(gameId);
   if (!game) return notFound("game not found");
 
   const userId = new URL(request.url).searchParams.get("userId");

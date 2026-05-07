@@ -5,7 +5,7 @@ import { WalletRequiredNotice } from "../components/WalletRequiredNotice";
 
 const demoBoard: readonly ("X" | "O" | "")[] = ["X", "O", "", "", "X", "", "O", "", ""];
 
-export default function LobbyPage(): JSX.Element {
+export default function LobbyPage() {
   return (
     <main style={{ maxWidth: 900, margin: "40px auto", padding: 16, display: "grid", gap: 20 }}>
       <section>

@@ -37,7 +37,7 @@ export function TxIntentPlaceholder({
   provisional,
   pendingActions,
   controls,
-}: TxIntentPlaceholderProps): JSX.Element {
+}: TxIntentPlaceholderProps) {
   return (
     <div
       style={{

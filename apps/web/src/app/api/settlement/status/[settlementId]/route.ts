@@ -3,9 +3,10 @@ import { getSettlement } from "../../../../../lib/server/settlement/settlementQu
 
 export async function GET(
   _request: Request,
-  context: { params: { settlementId: string } }
+  context: { params: Promise<{ settlementId: string }> }
 ): Promise<Response> {
-  const settlement = getSettlement(context.params.settlementId);
+  const { settlementId } = await context.params;
+  const settlement = getSettlement(settlementId);
   if (!settlement) return notFound("settlement not found");
 
   return ok({

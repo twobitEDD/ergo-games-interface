@@ -7,13 +7,14 @@ import {
 
 export async function GET(
   _request: Request,
-  context: { params: { userId: string } }
+  context: { params: Promise<{ userId: string }> }
 ): Promise<Response> {
+  const { userId } = await context.params;
   return ok({
-    userId: context.params.userId,
-    progression: getProgressForUser(context.params.userId),
-    rewards: getRewardsForUser(context.params.userId),
-    settlementLifecycle: getSettlementLifecycleForUser(context.params.userId).map((settlement) => ({
+    userId,
+    progression: getProgressForUser(userId),
+    rewards: getRewardsForUser(userId),
+    settlementLifecycle: getSettlementLifecycleForUser(userId).map((settlement) => ({
       settlementId: settlement.settlementId,
       rewardId: settlement.rewardId,
       lifecycleStatus: settlement.lifecycleStatus,

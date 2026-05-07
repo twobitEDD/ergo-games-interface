@@ -1,9 +1,11 @@
+"use client";
+
 type TicTacToeBoardProps = {
   board: readonly ("X" | "O" | "")[];
   onMoveIntent?: (cell: number) => void;
 };
 
-export function TicTacToeBoard({ board, onMoveIntent }: TicTacToeBoardProps): JSX.Element {
+export function TicTacToeBoard({ board, onMoveIntent }: TicTacToeBoardProps) {
   return (
     <div
       style={{

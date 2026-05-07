@@ -1,4 +1,4 @@
-export function WalletRequiredNotice(): JSX.Element {
+export function WalletRequiredNotice() {
   return (
     <div
       style={{

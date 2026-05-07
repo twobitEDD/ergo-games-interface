@@ -3,9 +3,10 @@ import { getOnChainIntent } from "../../../../../lib/server/memoryStore";
 
 export async function GET(
   _request: Request,
-  context: { params: { intentId: string } }
+  context: { params: Promise<{ intentId: string }> }
 ): Promise<Response> {
-  const intent = getOnChainIntent(context.params.intentId);
+  const { intentId } = await context.params;
+  const intent = getOnChainIntent(intentId);
   if (!intent) return notFound("intent not found");
 
   return ok({

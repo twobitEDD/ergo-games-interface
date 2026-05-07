@@ -24,7 +24,7 @@ const modeCopy: Record<
   },
 };
 
-export function ModeBadge({ mode }: ModeBadgeProps): JSX.Element {
+export function ModeBadge({ mode }: ModeBadgeProps) {
   const copy = modeCopy[mode];
   return (
     <span

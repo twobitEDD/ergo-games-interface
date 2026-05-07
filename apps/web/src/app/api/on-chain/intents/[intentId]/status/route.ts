@@ -4,12 +4,13 @@ import { updateOnChainIntent } from "../../../../../../lib/server/memoryStore";
 
 export async function POST(
   request: Request,
-  context: { params: { intentId: string } }
+  context: { params: Promise<{ intentId: string }> }
 ): Promise<Response> {
   try {
+    const { intentId } = await context.params;
     const payload = parseTxIntentUpdateInput(await parseJsonBody(request));
     const updated = updateOnChainIntent({
-      intentId: context.params.intentId,
+      intentId,
       ...payload,
     });
     if (updated === "NOT_FOUND") return notFound("intent not found");
