@@ -1,0 +1,11 @@
+{
+  "name": "@ergo-games/db",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "echo \"db build placeholder\"",
+    "lint": "echo \"db lint placeholder\"",
+    "test": "echo \"db test placeholder\""
+  }
+}

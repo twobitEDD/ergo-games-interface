@@ -1,0 +1,11 @@
+{
+  "name": "@ergo-games/domain",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "echo \"domain build placeholder\"",
+    "lint": "echo \"domain lint placeholder\"",
+    "test": "echo \"domain test placeholder\""
+  }
+}
