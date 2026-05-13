@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Compliance, Operations, and EKB Gates - Ergo Games Interface Docs</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Ergo Games Interface Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../getting-started/" class="nav-link">Getting Started</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../architecture/" class="nav-link">Architecture</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../local-development/" class="nav-link">Local Development</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../api-catalog/" class="nav-link">API Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../release-progression/" class="nav-link">Release Progression</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../ekb-integration/" class="nav-link">EKB Integration</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../operations-runbook/" class="nav-link">Operations Runbook</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../compliance-gates/" class="nav-link">Compliance Gates</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../migration-map/" class="nav-link">Migration Map</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../releases/" class="nav-link">Releases</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/twobitEDD/ergo-games-interface/edit/master/docs/05-compliance-operations-and-ekb-gates.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#compliance-operations-and-ekb-gates" class="nav-link">Compliance, Operations, and EKB Gates</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#compliance-requirements" class="nav-link">Compliance Requirements</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#mode-specific-trust-language" class="nav-link">Mode-Specific Trust Language</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#operational-kill-switches" class="nav-link">Operational Kill Switches</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#abuse-prevention" class="nav-link">Abuse Prevention</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#operational-dashboard-seams" class="nav-link">Operational Dashboard Seams</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#incident-behavior" class="nav-link">Incident Behavior</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#sponsored-settlement-eligibility" class="nav-link">Sponsored Settlement Eligibility</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#ekb-gated-ergo-work" class="nav-link">EKB-Gated Ergo Work</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#release-gate-requirements" class="nav-link">Release Gate Requirements</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="compliance-operations-and-ekb-gates">Compliance, Operations, and EKB Gates</h1>
+<h2 id="compliance-requirements">Compliance Requirements</h2>
+<p>The platform remains no-wager by default.</p>
+<h3 id="prohibited-product-language">Prohibited Product Language</h3>
+<p>Do not use:</p>
+<ul>
+<li>bet</li>
+<li>wager</li>
+<li>stake your funds</li>
+<li>jackpot</li>
+<li>odds</li>
+<li>casino-style</li>
+<li>guaranteed payout</li>
+<li>risk-free profit</li>
+<li>earn yield</li>
+<li>double your money</li>
+<li>win real money every game</li>
+<li>cash prize from entry pool</li>
+<li>cash out</li>
+</ul>
+<h3 id="approved-product-language">Approved Product Language</h3>
+<p>Use:</p>
+<ul>
+<li>play mode</li>
+<li>match result</li>
+<li>reward eligibility</li>
+<li>verification status</li>
+<li>on-chain confirmation</li>
+<li>sponsored settlement</li>
+<li>off-chain progression</li>
+<li>rank</li>
+<li>title</li>
+<li>badge</li>
+<li>standing</li>
+<li>season reward eligibility</li>
+</ul>
+<h2 id="mode-specific-trust-language">Mode-Specific Trust Language</h2>
+<h3 id="on_chain_play">ON_CHAIN_PLAY</h3>
+<p>Required messaging:</p>
+<ul>
+<li>wallet-aware path</li>
+<li>explicit user-signed actions</li>
+<li>submitted state is not final</li>
+<li>confirmed state is not necessarily finalized unless confirmation depth is met</li>
+<li>finality remains provisional until configured threshold</li>
+</ul>
+<h3 id="free_play">FREE_PLAY</h3>
+<p>Required messaging:</p>
+<ul>
+<li>no-funds path</li>
+<li>off-chain progression</li>
+<li>non-cash progression</li>
+<li>event logging</li>
+<li>no wallet required</li>
+</ul>
+<h3 id="sponsored_play">SPONSORED_PLAY</h3>
+<p>Required messaging:</p>
+<ul>
+<li>no-funds user path</li>
+<li>sponsored settlement may be available when eligible</li>
+<li>eligibility is not guaranteed</li>
+<li>sponsored settlement can fail or be disabled</li>
+<li>core gameplay can continue off-chain</li>
+</ul>
+<h2 id="operational-kill-switches">Operational Kill Switches</h2>
+<p>Required controls:</p>
+<pre><code class="language-txt">DISABLE_SPONSORED_SETTLEMENT
+DISABLE_ON_CHAIN_INTENTS
+DISABLE_RANKED_PLAY
+DISABLE_REWARD_GRANTS
+FORCE_FREE_PLAY_ONLY
+DISABLE_BATCH_COMMITMENTS
+DISABLE_REMATCH_RANKING
+DISABLE_TOURNAMENTS
+</code></pre>
+<h2 id="abuse-prevention">Abuse Prevention</h2>
+<p>Required abuse checks:</p>
+<ul>
+<li>duplicate account farming</li>
+<li>self-play ranking abuse</li>
+<li>rematch farming</li>
+<li>suspicious win trading</li>
+<li>ranking manipulation</li>
+<li>reward endpoint abuse</li>
+<li>sponsored settlement spam</li>
+<li>replay mismatch frequency</li>
+<li>batch commitment anomalies</li>
+<li>settlement retry anomalies</li>
+</ul>
+<h2 id="operational-dashboard-seams">Operational Dashboard Seams</h2>
+<p>Track:</p>
+<ul>
+<li>active games</li>
+<li>completed games</li>
+<li>invalid move attempts</li>
+<li>replay validation failures</li>
+<li>settlement queue depth</li>
+<li>settlement retries</li>
+<li>indexer observations</li>
+<li>provisional vs finalized intent counts</li>
+<li>sponsored settlement refusal counts</li>
+<li>abuse flags</li>
+<li>ranking correction events</li>
+<li>batch commitment failures</li>
+</ul>
+<h2 id="incident-behavior">Incident Behavior</h2>
+<p>The platform must support:</p>
+<ul>
+<li>pause lifecycle progression when trust/finality is uncertain</li>
+<li>fallback to off-chain-only mode when settlement path fails</li>
+<li>quarantine replay mismatches</li>
+<li>pause reward grants during abuse review</li>
+<li>preserve audit log</li>
+<li>record post-incident review</li>
+</ul>
+<h2 id="sponsored-settlement-eligibility">Sponsored Settlement Eligibility</h2>
+<p>Sponsored settlement is allowed only when:</p>
+<ul>
+<li>mode is <code>SPONSORED_PLAY</code></li>
+<li>sponsored settlement is enabled</li>
+<li>game is complete</li>
+<li>replay validates</li>
+<li>batch commitment validates</li>
+<li>account passes abuse checks</li>
+<li>game type is eligible</li>
+<li>user/system limits are not exceeded</li>
+</ul>
+<p>Refusal reasons:</p>
+<ul>
+<li><code>NOT_SPONSORED_MODE</code></li>
+<li><code>GAME_NOT_COMPLETE</code></li>
+<li><code>REPLAY_INVALID</code></li>
+<li><code>BATCH_INVALID</code></li>
+<li><code>USER_LIMIT_EXCEEDED</code></li>
+<li><code>SYSTEM_LIMIT_EXCEEDED</code></li>
+<li><code>ABUSE_FLAGGED</code></li>
+<li><code>SPONSORED_SETTLEMENT_DISABLED</code></li>
+<li><code>POLICY_NOT_ELIGIBLE</code></li>
+</ul>
+<h2 id="ekb-gated-ergo-work">EKB-Gated Ergo Work</h2>
+<p>All wallet, settlement, contract, transaction-building, signature UX, ErgoScript, box/value handling, Fleet SDK, Nautilus, Babel fee, or AppKit work must follow the EKB workflow.</p>
+<h3 id="before-implementation">Before Implementation</h3>
+<p>Classify scope:</p>
+<ul>
+<li>UI/API only</li>
+<li>domain/game rules</li>
+<li>wallet</li>
+<li>settlement</li>
+<li>contract</li>
+<li>database</li>
+<li>compliance/trust copy</li>
+</ul>
+<p>Mark stories as EKB-required if they touch:</p>
+<ul>
+<li>wallet flow</li>
+<li>settlement flow</li>
+<li>transaction building</li>
+<li>signature UX</li>
+<li>ErgoScript</li>
+<li>box/value handling</li>
+<li>indexer reconciliation</li>
+<li>sponsored settlement</li>
+<li>confirmation/finality logic</li>
+</ul>
+<p>Use relevant EKB tools:</p>
+<ul>
+<li><code>get_pattern</code></li>
+<li><code>get_skill</code></li>
+<li><code>get_eip</code></li>
+<li><code>get_ergoscript_ref</code></li>
+</ul>
+<h3 id="before-merge">Before Merge</h3>
+<p>Required PR evidence:</p>
+<ul>
+<li>scope classification</li>
+<li>EKB queries performed</li>
+<li>implementation decision</li>
+<li>pattern/EIP/ErgoScript references used</li>
+<li><code>audit_contract</code> artifact where applicable</li>
+<li><code>audit_verify</code> artifact where applicable</li>
+<li>affected release gates</li>
+<li>compliance/trust-language impact</li>
+</ul>
+<h3 id="stop-conditions">Stop Conditions</h3>
+<p>Do not merge if:</p>
+<ul>
+<li>EKB evidence is missing</li>
+<li>contract audit findings remain unresolved</li>
+<li>audit verification has not run after fixes</li>
+<li>compliance controls are undefined</li>
+<li>incident controls are undefined for a new settlement capability</li>
+</ul>
+<h2 id="release-gate-requirements">Release Gate Requirements</h2>
+<p>A phase is not complete until:</p>
+<h3 id="engineering">Engineering</h3>
+<ul>
+<li><code>npm run lint</code> passes</li>
+<li><code>npm run test</code> passes</li>
+<li><code>npm run build</code> passes</li>
+<li><code>npm run check</code> passes</li>
+<li>replay validation tests pass where applicable</li>
+<li>idempotency tests pass where applicable</li>
+<li>trust-language tests pass where applicable</li>
+</ul>
+<h3 id="compliance">Compliance</h3>
+<ul>
+<li>no-wager language review completed</li>
+<li>no payout language introduced</li>
+<li>no cash conversion language introduced</li>
+<li>finality not overstated</li>
+<li>mode notices remain explicit</li>
+</ul>
+<h3 id="operations">Operations</h3>
+<ul>
+<li>rollback path documented</li>
+<li>incident controls reviewed</li>
+<li>kill switches tested where applicable</li>
+<li>settlement fallback tested where applicable</li>
+<li>runbook updated</li>
+</ul>
+<h3 id="ergo-facing-changes">Ergo-Facing Changes</h3>
+<ul>
+<li>EKB evidence attached</li>
+<li>contract audit completed where applicable</li>
+<li>audit verification completed after fixes</li>
+<li>release gate impact documented</li>
+<li>stop conditions cleared</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "@ergo-games/web",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@twobitedd/ergo-games-interface": "0.1.1",
+    "next": "^15.3.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.18",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "typescript": "^5.8.3"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "lint": "echo \"web lint placeholder\"",
+    "test": "node --import tsx --test src/**/*.test.ts"
+  }
+}

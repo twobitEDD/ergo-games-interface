@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>API and Data Model Requirements - Ergo Games Interface Docs</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Ergo Games Interface Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../getting-started/" class="nav-link">Getting Started</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../architecture/" class="nav-link">Architecture</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../local-development/" class="nav-link">Local Development</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../api-catalog/" class="nav-link">API Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../release-progression/" class="nav-link">Release Progression</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../ekb-integration/" class="nav-link">EKB Integration</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../operations-runbook/" class="nav-link">Operations Runbook</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../compliance-gates/" class="nav-link">Compliance Gates</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../migration-map/" class="nav-link">Migration Map</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../releases/" class="nav-link">Releases</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/twobitEDD/ergo-games-interface/edit/master/docs/04-api-and-data-model-requirements.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#api-and-data-model-requirements" class="nav-link">API and Data Model Requirements</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#existing-apis-to-preserve" class="nav-link">Existing APIs to Preserve</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#new-apis-to-add" class="nav-link">New APIs to Add</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#core-data-models" class="nav-link">Core Data Models</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#required-service-modules" class="nav-link">Required Service Modules</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="api-and-data-model-requirements">API and Data Model Requirements</h1>
+<h2 id="existing-apis-to-preserve">Existing APIs to Preserve</h2>
+<pre><code class="language-txt">POST /api/auth/sync
+GET  /api/me
+POST /api/wallet/bind
+
+POST /api/games/create
+POST /api/games/join
+POST /api/games/move
+GET  /api/games/[gameId]
+
+GET  /api/rewards/[userId]
+
+POST /api/on-chain/intents
+GET  /api/on-chain/intents
+GET  /api/on-chain/intents/[intentId]
+POST /api/on-chain/intents/[intentId]/status
+GET  /api/on-chain/status/[intentId]
+POST /api/on-chain/prepare
+GET  /api/on-chain/controls
+POST /api/on-chain/controls
+
+POST /api/settlement/enqueue
+POST /api/settlement/worker/run
+GET  /api/settlement/status/[settlementId]
+POST /api/settlement/indexer/observe
+</code></pre>
+<h2 id="new-apis-to-add">New APIs to Add</h2>
+<pre><code class="language-txt">GET  /api/games/types
+GET  /api/games/types/[gameType]
+
+POST /api/games/rematch/request
+POST /api/games/rematch/accept
+POST /api/games/rematch/decline
+GET  /api/games/rematch-group/[rematchGroupId]
+
+POST /api/games/series/create
+GET  /api/games/series/[seriesId]
+
+GET  /api/games/[gameId]/replay
+GET  /api/replays/[replayId]
+POST /api/replays/[replayId]/validate
+
+GET  /api/rankings/[userId]
+GET  /api/leaderboards
+GET  /api/achievements/[userId]
+GET  /api/progression/[userId]
+
+POST /api/account/guest
+POST /api/account/register
+POST /api/account/convert-to-wallet
+GET  /api/account/[userId]/history
+
+POST /api/game-batches/create
+GET  /api/game-batches/[batchId]
+POST /api/game-batches/[batchId]/enqueue-settlement
+GET  /api/game-batches/[batchId]/status
+
+POST /api/seasons/create
+GET  /api/seasons/current
+GET  /api/seasons/[seasonId]/standings
+
+POST /api/tournaments/create
+POST /api/tournaments/[tournamentId]/join
+GET  /api/tournaments/[tournamentId]
+POST /api/tournaments/[tournamentId]/start
+GET  /api/tournaments/[tournamentId]/bracket
+</code></pre>
+<h2 id="core-data-models">Core Data Models</h2>
+<h3 id="gamesession">GameSession</h3>
+<pre><code class="language-ts">export type GameSession = {
+  gameId: string;
+  gameType: string;
+  gameVersion: string;
+  mode: &quot;ON_CHAIN_PLAY&quot; | &quot;FREE_PLAY&quot; | &quot;SPONSORED_PLAY&quot;;
+  trustLabel: &quot;WALLET_PATH&quot; | &quot;NO_FUNDS_PATH&quot;;
+  status: &quot;WAITING&quot; | &quot;ACTIVE&quot; | &quot;COMPLETE&quot; | &quot;ABANDONED&quot;;
+  hostUserId: string;
+  joinerUserId?: string;
+  participantUserIds: string[];
+  currentTurnUserId?: string;
+  winnerUserId?: string | null;
+  resultReason?: &quot;WIN&quot; | &quot;DRAW&quot; | &quot;FORFEIT&quot; | &quot;TIMEOUT&quot;;
+  currentStateHash: string;
+  moveCount: number;
+  ranked: boolean;
+  rematchGroupId?: string;
+  seriesId?: string;
+  createdAt: string;
+  startedAt?: string;
+  completedAt?: string;
+};
+</code></pre>
+<h3 id="gameevent">GameEvent</h3>
+<pre><code class="language-ts">export type GameEvent = {
+  eventId: string;
+  gameId: string;
+  eventIndex: number;
+  eventType:
+    | &quot;GAME_CREATED&quot;
+    | &quot;PLAYER_JOINED&quot;
+    | &quot;MOVE_SUBMITTED&quot;
+    | &quot;MOVE_REJECTED&quot;
+    | &quot;MOVE_APPLIED&quot;
+    | &quot;GAME_COMPLETED&quot;
+    | &quot;GAME_ABANDONED&quot;
+    | &quot;REMATCH_REQUESTED&quot;
+    | &quot;REMATCH_ACCEPTED&quot;;
+  actorUserId?: string;
+  requestId?: string;
+  previousStateHash?: string;
+  nextStateHash?: string;
+  payload: unknown;
+  createdAt: string;
+};
+</code></pre>
+<h3 id="gamereplay">GameReplay</h3>
+<pre><code class="language-ts">export type GameReplay = {
+  replayId: string;
+  gameId: string;
+  gameType: string;
+  gameVersion: string;
+  initialState: unknown;
+  initialStateHash: string;
+  finalStateHash: string;
+  moves: ReplayMove[];
+  result: GameResult;
+  createdAt: string;
+};
+</code></pre>
+<h3 id="replaymove">ReplayMove</h3>
+<pre><code class="language-ts">export type ReplayMove = {
+  moveNumber: number;
+  actorUserId: string;
+  move: unknown;
+  previousStateHash: string;
+  nextStateHash: string;
+  appliedAt: string;
+};
+</code></pre>
+<h3 id="rematchgroup">RematchGroup</h3>
+<pre><code class="language-ts">export type RematchGroup = {
+  rematchGroupId: string;
+  originalGameId: string;
+  gameType: string;
+  participantUserIds: string[];
+  gameIds: string[];
+  createdAt: string;
+  updatedAt: string;
+};
+</code></pre>
+<h3 id="matchseries">MatchSeries</h3>
+<pre><code class="language-ts">export type MatchSeries = {
+  seriesId: string;
+  gameType: string;
+  participantUserIds: string[];
+  gameIds: string[];
+  format: &quot;BEST_OF_3&quot; | &quot;BEST_OF_5&quot; | &quot;OPEN_RIVALRY&quot;;
+  scoreByUserId: Record&lt;string, number&gt;;
+  status: &quot;ACTIVE&quot; | &quot;COMPLETE&quot;;
+  createdAt: string;
+};
+</code></pre>
+<h3 id="rankingprofile">RankingProfile</h3>
+<pre><code class="language-ts">export type RankingProfile = {
+  userId: string;
+  gameType: string;
+  rating: number;
+  rankTier: string;
+  rankDivision: number;
+  wins: number;
+  losses: number;
+  draws: number;
+  currentStreak: number;
+  bestStreak: number;
+  seasonId?: string;
+  updatedAt: string;
+};
+</code></pre>
+<h3 id="rankingevent">RankingEvent</h3>
+<pre><code class="language-ts">export type RankingEvent = {
+  eventId: string;
+  userId: string;
+  gameId: string;
+  gameType: string;
+  oldRating: number;
+  newRating: number;
+  oldRank?: string;
+  newRank?: string;
+  reason:
+    | &quot;MATCH_RESULT&quot;
+    | &quot;SEASON_RESET&quot;
+    | &quot;ADMIN_ADJUSTMENT&quot;
+    | &quot;ABUSE_CORRECTION&quot;;
+  createdAt: string;
+};
+</code></pre>
+<h3 id="walletbinding">WalletBinding</h3>
+<pre><code class="language-ts">export type WalletBinding = {
+  walletBindingId: string;
+  userId: string;
+  network: &quot;testnet&quot; | &quot;mainnet&quot;;
+  address: string;
+  verified: boolean;
+  createdAt: string;
+};
+</code></pre>
+<h3 id="gamebatchcommitment">GameBatchCommitment</h3>
+<pre><code class="language-ts">export type GameBatchCommitment = {
+  batchId: string;
+  gameType?: string;
+  mode: &quot;FREE_PLAY&quot; | &quot;SPONSORED_PLAY&quot; | &quot;ON_CHAIN_PLAY&quot;;
+  fromEventId: string;
+  toEventId: string;
+  eventCount: number;
+  merkleRoot: string;
+  commitmentHash: string;
+  settlementId?: string;
+  status:
+    | &quot;CREATED&quot;
+    | &quot;QUEUED&quot;
+    | &quot;COMMITTED&quot;
+    | &quot;OBSERVED&quot;
+    | &quot;VERIFIED&quot;
+    | &quot;FAILED&quot;;
+  createdAt: string;
+};
+</code></pre>
+<h3 id="sponsored-settlement-refusal-reasons">Sponsored Settlement Refusal Reasons</h3>
+<pre><code class="language-ts">export type SponsoredSettlementRefusalReason =
+  | &quot;NOT_SPONSORED_MODE&quot;
+  | &quot;GAME_NOT_COMPLETE&quot;
+  | &quot;REPLAY_INVALID&quot;
+  | &quot;BATCH_INVALID&quot;
+  | &quot;USER_LIMIT_EXCEEDED&quot;
+  | &quot;SYSTEM_LIMIT_EXCEEDED&quot;
+  | &quot;ABUSE_FLAGGED&quot;
+  | &quot;SPONSORED_SETTLEMENT_DISABLED&quot;
+  | &quot;POLICY_NOT_ELIGIBLE&quot;;
+</code></pre>
+<h2 id="required-service-modules">Required Service Modules</h2>
+<pre><code class="language-txt">packages/services/src/gameplay/
+  gameSessionService.ts
+  moveService.ts
+  rematchService.ts
+  seriesService.ts
+
+packages/services/src/replay/
+  replayRecorder.ts
+  replayValidator.ts
+  replayProjector.ts
+
+packages/services/src/ranking/
+  ratingEngine.ts
+  rankTierService.ts
+  leaderboardService.ts
+  seasonService.ts
+
+packages/services/src/achievements/
+  achievementService.ts
+  achievementDefinitions.ts
+
+packages/services/src/progression/
+  progressionService.ts
+
+packages/services/src/settlement/
+  settlementQueue.ts
+  sponsoredEligibilityService.ts
+  batchCommitments/
+    batchBuilder.ts
+    merkleRootService.ts
+    commitmentSerializer.ts
+
+packages/services/src/wallet/
+  walletBindingService.ts
+  walletVerificationService.ts
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

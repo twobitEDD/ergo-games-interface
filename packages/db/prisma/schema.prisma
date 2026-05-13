@@ -1,0 +1,143 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum GameMode {
+  ON_CHAIN_PLAY
+  FREE_PLAY
+  SPONSORED_PLAY
+}
+
+enum GameStatus {
+  LOBBY
+  ACTIVE
+  FINISHED
+  CANCELLED
+}
+
+enum GameEventType {
+  CREATED
+  JOINED
+  MOVE_APPLIED
+  RESULT_RECORDED
+}
+
+enum RewardType {
+  PARTICIPATION
+  ACHIEVEMENT
+}
+
+enum RewardStatus {
+  PENDING
+  GRANTED
+  REVOKED
+}
+
+enum SettlementType {
+  OFF_CHAIN_ONLY
+  USER_SIGNED_ON_CHAIN
+  SERVER_SPONSORED_ON_CHAIN
+}
+
+enum SettlementStatus {
+  NOT_STARTED
+  PREPARED
+  SUBMITTED
+  CONFIRMED
+  FAILED
+}
+
+model User {
+  id           String          @id @default(cuid())
+  externalAuthId String        @unique
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  wallets      Wallet[]
+  profile      PlayerProfile?
+  gamesAsHost  Game[]          @relation("HostGames")
+  rewards      Reward[]
+}
+
+model Wallet {
+  id          String    @id @default(cuid())
+  userId      String
+  network     String
+  address     String    @unique
+  label       String?
+  isPrimary   Boolean   @default(false)
+  verifiedAt  DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PlayerProfile {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  displayName   String
+  trustNoticeAcceptedAt DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Game {
+  id               String         @id @default(cuid())
+  mode             GameMode
+  status           GameStatus     @default(LOBBY)
+  hostUserId       String
+  joinerUserId     String?
+  boardSnapshot    Json
+  currentTurn      String
+  winnerPlayer     String?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  host             User           @relation("HostGames", fields: [hostUserId], references: [id], onDelete: Restrict)
+  events           GameEvent[]
+  settlements      Settlement[]
+}
+
+model GameEvent {
+  id            String         @id @default(cuid())
+  gameId         String
+  type           GameEventType
+  actorUserId    String?
+  payload        Json
+  createdAt      DateTime      @default(now())
+  game           Game          @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@index([gameId, createdAt])
+}
+
+model Reward {
+  id              String        @id @default(cuid())
+  userId          String
+  gameId          String?
+  type            RewardType
+  status          RewardStatus  @default(PENDING)
+  units           Int
+  reason          String
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Settlement {
+  id              String            @id @default(cuid())
+  gameId          String
+  type            SettlementType
+  status          SettlementStatus  @default(NOT_STARTED)
+  txIntentId      String?
+  txId            String?
+  metadata        Json?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  game            Game              @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@index([gameId, status])
+}

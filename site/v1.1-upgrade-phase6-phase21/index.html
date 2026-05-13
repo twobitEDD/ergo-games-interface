@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>V1.1 upgrade phase6 phase21 - Ergo Games Interface Docs</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Ergo Games Interface Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../getting-started/" class="nav-link">Getting Started</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../architecture/" class="nav-link">Architecture</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../local-development/" class="nav-link">Local Development</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../api-catalog/" class="nav-link">API Catalog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../release-progression/" class="nav-link">Release Progression</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../ekb-integration/" class="nav-link">EKB Integration</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../operations-runbook/" class="nav-link">Operations Runbook</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../compliance-gates/" class="nav-link">Compliance Gates</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../migration-map/" class="nav-link">Migration Map</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../releases/" class="nav-link">Releases</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/twobitEDD/ergo-games-interface/edit/master/docs/v1.1-upgrade-phase6-phase21.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>You are working in the existing Ergo Games Interface repository.</p>
+<p>This is not a single-game implementation request. This is the Phase 6+ expansion of Ergo Games Interface into a reusable deterministic online game platform.</p>
+<p>The platform must allow future games to plug into shared infrastructure for:
+- deterministic game rules
+- free no-funds play
+- sponsored no-funds settlement scaffolding
+- wallet-aware on-chain play
+- explicit user-signed wallet actions
+- rematches
+- match series
+- replay validation
+- ranking
+- prestige/achievements
+- non-cash progression
+- account conversion from no-funds user to wallet-bound user
+- event batch commitments
+- settlement queue/reconciliation
+- operational kill switches
+- compliance-safe trust language
+- EKB-gated Ergo-facing implementation</p>
+<p>Respect existing project architecture:
+- apps/web: API routes, UI, mode notices, auth, wallet, rewards, on-chain intent lifecycle, settlement scaffolding.
+- packages/domain: canonical deterministic game rule engine only.
+- packages/services: gameplay orchestration, replay, ranking, progression, wallet, settlement, batching, rematches, series, achievements.
+- packages/db: schema and durable repository seams.
+- docs: architecture, API catalog, compliance gates, EKB workflow, local development, operations, release progression.</p>
+<p>Core principle:
+Same rules, different settlement rails.</p>
+<p>Supported modes:
+- ON_CHAIN_PLAY: wallet-aware path, explicit user-signed actions, finality provisional until confirmation threshold.
+- FREE_PLAY: no-funds mode, off-chain authoritative event log, non-cash progression only.
+- SPONSORED_PLAY: no-funds user path with controlled server-sponsored settlement scaffolding when eligible.</p>
+<p>Compliance:
+- Default mode is no-wager.
+- Do not use bet, wager, stake, jackpot, odds, guaranteed payout, yield, profit, double your money, cash prize, or cash-out language.
+- Use play mode, match result, reward eligibility, verification status, on-chain confirmation, sponsored settlement, off-chain progression.
+- Do not imply guaranteed monetary return.
+- Do not imply direct conversion from progression points to cash value.
+- Do not represent provisional chain states as final.</p>
+<p>Implement Phase 6 first, then scaffold the later phases.</p>
+<p>PHASE 6 — Generic Game Module Framework
+1. Add GameRules interface in packages/domain.
+2. Add shared GameResult, ValidationResult, GameConfig, StateHash types.
+3. Wrap existing deterministic game modules behind GameRules.
+4. Add gameRegistry.
+5. Extend gameplay service to resolve game rules by gameType.
+6. Extend /api/games/create to accept gameType and config.
+7. Extend /api/games/move to accept generic move payload while preserving existing requestId idempotency.
+8. Add deterministic state serialization and hashing.
+9. Add tests for deterministic rule execution and replayed hash output.</p>
+<p>PHASE 7 — Game-Agnostic Gameplay Sessions
+1. Add GameSession model with gameType, gameVersion, mode, trustLabel, status, participants, stateHash, ranked, rematchGroupId, seriesId.
+2. Add append-only GameEvent model.
+3. Preserve requestId idempotency.
+4. Keep route handlers thin.</p>
+<p>PHASE 8 — Durable Repository Seams
+1. Add repositories for users, wallets, game sessions, events, replays, rankings, rewards, settlement, batch commitments.
+2. Keep in-memory adapters if needed for local tests.
+3. Prepare for durable DB without coupling route handlers to storage.</p>
+<p>PHASE 9 — Replay and Verification
+1. Add replayRecorder, replayValidator, replayProjector.
+2. Add replay APIs.
+3. Reconstruct matches from initial state and moves.
+4. Validate previous and next state hashes.
+5. Return replay mismatch status without mutating original result.</p>
+<p>PHASE 10 — Rematches and Series
+1. Add rematchService, seriesService, rivalryService.
+2. Add rematch request/accept/decline APIs.
+3. Add match series APIs.
+4. Rematches preserve gameType and compatible config.
+5. Series and rivalry logic stays outside domain rules.</p>
+<p>PHASE 11 — Ranking and Prestige
+1. Add rankingService, ratingEngine, rankTierService, leaderboardService.
+2. Add achievementService and progressionService.
+3. Add ranking, leaderboard, achievement, progression APIs.
+4. Ranked games update ranking after validated completion.
+5. Casual games do not affect ranking unless configured.
+6. Achievements are derived from events/replays.</p>
+<p>PHASE 12 — Healthy Post-Game Analysis
+1. Add matchStatsService and postGameSummaryService.
+2. Add analyzer registry for game-specific metrics.
+3. Metrics are derived from replay/events.
+4. Metrics do not affect official game result.
+5. Post-game summary includes replay, rematch, series state, progression, ranking, achievements, trust notice.</p>
+<p>PHASE 13 — Browser Runtime and Game-Agnostic UI
+1. Build actual Next.js runtime.
+2. Add game renderer registry.
+3. Add shared UI components:
+   ModeBadge, TrustNotice, WalletPathNotice, NoFundsPathNotice, SponsoredSettlementNotice, FinalityStatusPill, GameShell, MatchStatusBar, MoveHistory, PostGameSummary, RematchPanel, SeriesPanel, ReplayViewer, RankingPanel, LeaderboardPanel, AchievementPanel, WalletBindPanel.
+4. UI must support FREE_PLAY, SPONSORED_PLAY, and ON_CHAIN_PLAY trust language.</p>
+<p>PHASE 14 — No-Funds Account Path and Wallet Conversion
+1. Add guest/register/wallet-bound account states.
+2. Add account conversion endpoint.
+3. Preserve match history, replays, rankings, achievements, progression, and reward lifecycle when wallet is bound.
+4. Do not imply progression converts into cash value.
+5. Wallet-aware actions still require explicit signing.</p>
+<p>PHASE 15 — Batch Commitments
+1. Add batchBuilder, merkleRootService, commitmentSerializer, batchCommitmentRepository.
+2. Add game batch APIs.
+3. Build deterministic commitment hash from append-only game events.
+4. FREE_PLAY batches can remain off-chain.
+5. SPONSORED_PLAY batches can be queued if eligible.
+6. ON_CHAIN_PLAY batches align with user-signed intent lifecycle.</p>
+<p>PHASE 16 — Sponsored Settlement Policy
+1. Add sponsoredEligibilityService.
+2. Add refusal reasons.
+3. Add policy limits.
+4. Add kill switch.
+5. Sponsored settlement failures must not disable core gameplay.</p>
+<p>PHASE 17 — Wallet-Aware/Funded UX Acceleration
+1. Improve intent lifecycle visibility.
+2. Add recovery actions.
+3. Add confirmation/finality cues.
+4. Preserve explicit user signing.
+5. Preserve provisional finality labels.</p>
+<p>PHASE 18 — EKB-Gated Ergo Hardening
+1. Mark wallet, settlement, contract, transaction, signature, ErgoScript, box/value stories as EKB-required.
+2. Require get_pattern, get_skill, get_eip, get_ergoscript_ref as applicable.
+3. Require audit_contract and audit_verify for settlement/contract changes.
+4. Block merge on missing EKB evidence or unresolved audit findings.</p>
+<p>PHASE 19 — Abuse Prevention and Operations
+1. Add abuse checks for duplicate accounts, self-play, rematch farming, ranking manipulation, settlement spam, replay mismatches.
+2. Add kill switches:
+   DISABLE_SPONSORED_SETTLEMENT
+   DISABLE_ON_CHAIN_INTENTS
+   DISABLE_RANKED_PLAY
+   DISABLE_REWARD_GRANTS
+   FORCE_FREE_PLAY_ONLY
+   DISABLE_BATCH_COMMITMENTS
+   DISABLE_REMATCH_RANKING
+3. Add operational metrics and dashboard seams.
+4. Update runbook.</p>
+<p>PHASE 20 — Seasons and Tournaments
+1. Add Season, SeasonStanding, Tournament models.
+2. Add season and tournament APIs.
+3. Default tournament mode should be FREE_PLAY unless policy changes.
+4. No pooled participant funds or payout language.</p>
+<p>PHASE 21 — Documentation and Release Gates
+1. Update architecture, API catalog, compliance gates, EKB integration, local development, operations runbook, release progression, releases, and README.
+2. Document every new API.
+3. Map every endpoint to release gate ownership.
+4. Add acceptance criteria, test requirements, compliance requirements, and rollback behavior.</p>
+<p>Validation:
+- npm run lint
+- npm run test
+- npm run build
+- npm run check
+- existing API smoke tests
+- replay validation tests
+- idempotency tests
+- trust-language tests
+- compliance review
+- operational fallback tests</p>
+<p>Do not implement future game-specific logic yet. Build the reusable platform layer so a future game can use these features without bloating its core rule engine.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

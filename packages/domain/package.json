@@ -1,0 +1,53 @@
+{
+  "name": "@twobitedd/ergo-games-interface",
+  "version": "0.1.2",
+  "description": "Deterministic Ergo game domain primitives and rule engines.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/twobitEDD/ergo-games-interface.git",
+    "directory": "packages/domain"
+  },
+  "homepage": "https://github.com/twobitEDD/ergo-games-interface/tree/main/packages/domain",
+  "bugs": {
+    "url": "https://github.com/twobitEDD/ergo-games-interface/issues"
+  },
+  "keywords": [
+    "ergo",
+    "games",
+    "deterministic",
+    "tic-tac-toe",
+    "rules-engine"
+  ],
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsc -p tsconfig.json",
+    "lint": "echo \"domain lint placeholder\"",
+    "test": "node --import tsx --test src/**/*.test.ts",
+    "prepare": "npm run build",
+    "check": "npm run build && npm run test",
+    "prepublishOnly": "npm run clean && npm run build && npm run test"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0",
+    "typescript": "^5.8.3"
+  }
+}

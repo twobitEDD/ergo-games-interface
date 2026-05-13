@@ -1,0 +1,59 @@
+{
+  "name": "@twobitedd/ergo-account-model",
+  "version": "0.1.1",
+  "description": "Provider-agnostic account and session model for Ergo apps.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/twobitEDD/ergo-account-model.git"
+  },
+  "homepage": "https://github.com/twobitEDD/ergo-account-model#readme",
+  "bugs": {
+    "url": "https://github.com/twobitEDD/ergo-account-model/issues"
+  },
+  "keywords": [
+    "ergo",
+    "wallet",
+    "account",
+    "session",
+    "react"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist",
+    "lint": "echo \"account-model lint placeholder\"",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run clean && npm run build && npm run test",
+    "test": "node --import tsx --test src/**/*.test.ts",
+    "check": "npm run build && npm run test"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.8.3"
+  }
+}

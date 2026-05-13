@@ -1,0 +1,83 @@
+export type ApiGameMode = "ON_CHAIN_PLAY" | "FREE_PLAY" | "SPONSORED_PLAY";
+
+export interface AuthSyncInput {
+  externalAuthId: string;
+  displayName: string;
+}
+
+export interface WalletBindInput {
+  userId: string;
+  network: "ERGO_MAINNET" | "ERGO_TESTNET";
+  address: string;
+}
+
+export interface CreateGameInput {
+  hostUserId: string;
+  mode: ApiGameMode;
+}
+
+export interface JoinGameInput {
+  gameId: string;
+  joinerUserId: string;
+}
+
+export interface MoveInput {
+  gameId: string;
+  actorUserId: string;
+  cell: number;
+  requestId?: string;
+}
+
+export interface OnChainPrepareInput {
+  gameId: string;
+  initiatorUserId: string;
+  idempotencyKey?: string;
+  settlementId?: string;
+}
+
+export type ApiTxIntentStatus =
+  | "PREPARED"
+  | "SIGNED"
+  | "SUBMITTED"
+  | "MEMPOOL_SEEN"
+  | "CONFIRMED"
+  | "FINALIZED"
+  | "FAILED"
+  | "REPLACED";
+
+export interface TxIntentCreateInput {
+  gameId: string;
+  initiatorUserId: string;
+  idempotencyKey: string;
+  settlementId?: string;
+}
+
+export interface TxIntentUpdateInput {
+  status: ApiTxIntentStatus;
+  txId?: string;
+  confirmations?: number;
+  note?: string;
+  replacementIntentId?: string;
+  failureReason?: string;
+}
+
+export interface TxIntentControlsUpdateInput {
+  strictConfirmationMode?: boolean;
+  optimisticMode?: boolean;
+  incidentFallbackToOffChain?: boolean;
+  confirmationDepth?: number;
+}
+
+export interface SettlementEnqueueInput {
+  settlementId: string;
+}
+
+export interface SettlementWorkerRunInput {
+  retryDelayMs?: number;
+}
+
+export interface SettlementIndexerObservationInput {
+  commitmentHash: string;
+  txId: string;
+  confirmations: number;
+}

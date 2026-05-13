@@ -1,4 +1,4 @@
-export const GAME_TYPES = ["tic_tac_toe", "coin_flip_demo"] as const;
+export const GAME_TYPES = ["tic_tac_toe", "coin_flip_demo", "xo3"] as const;
 
 export type GameType = (typeof GAME_TYPES)[number];
 
@@ -14,6 +14,76 @@ export interface GameTypeMetadata {
   description: string;
   supportsMoves: boolean;
   maturity: "ga" | "preview";
+}
+
+/** Canonical metadata for every registered `GameType` (lobby/catalog UIs, capability hints). */
+export const GAME_TYPE_CATALOG: Record<GameType, GameTypeMetadata> = {
+  tic_tac_toe: {
+    gameType: "tic_tac_toe",
+    displayName: "Tic-Tac-Toe",
+    description: "Classic 3×3 deterministic grid play.",
+    supportsMoves: true,
+    maturity: "ga",
+  },
+  coin_flip_demo: {
+    gameType: "coin_flip_demo",
+    displayName: "Coin Flip Demo",
+    description: "Lightweight demo surface for randomness and settlement hooks.",
+    supportsMoves: false,
+    maturity: "preview",
+  },
+  xo3: {
+    gameType: "xo3",
+    displayName: "XO3 (Ultimate Tic-Tac-Toe)",
+    description: "Nine-board meta game with forcing rules (XO3 / super tic-tac-toe family).",
+    supportsMoves: true,
+    maturity: "preview",
+  },
+};
+
+/** Scaffold response listing all known game types with stable display copy. */
+export const buildDefaultGameTypeListResponse = (): ApiGameTypeListResponse => ({
+  scaffold: true,
+  gameTypes: GAME_TYPES.map((gameType) => GAME_TYPE_CATALOG[gameType]),
+});
+
+export const describeRuntimeGameStatus = (status: RuntimeGameStatus): string => {
+  switch (status.kind) {
+    case "open":
+      return "Waiting for opponent";
+    case "ongoing":
+      return `Turn: ${status.turn}`;
+    case "won":
+      return `Winner: ${status.winner}`;
+    case "drawn":
+      return "Draw";
+    default: {
+      const _exhaustive: never = status;
+      return _exhaustive;
+    }
+  }
+};
+
+export type PlayerSeatMark = "X" | "O";
+
+/**
+ * Row shape for “my games” / session game lists where the caller knows their seat
+ * (matches common XO3-style HTTP payloads; reusable by other hosted games).
+ */
+export interface SeatedPlayerGameSummary {
+  gameId: string;
+  gameType: GameType;
+  mySeat: PlayerSeatMark;
+  playStatus: RuntimeGameStatus;
+  waitingGuest: boolean;
+  wagerCreditsPerPlayer: number;
+  offerOnChainSettlement: boolean;
+}
+
+export interface ApiListPlayerGamesResponse {
+  ok: boolean;
+  games?: SeatedPlayerGameSummary[];
+  error?: string;
 }
 
 export interface ApiGameTypeListResponse {

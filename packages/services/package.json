@@ -1,0 +1,11 @@
+{
+  "name": "@ergo-games/services",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "echo \"services build placeholder\"",
+    "lint": "echo \"services lint placeholder\"",
+    "test": "echo \"services test placeholder\""
+  }
+}
