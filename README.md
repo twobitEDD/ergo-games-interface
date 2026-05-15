@@ -32,7 +32,7 @@ This repository includes a MkDocs configuration so the `docs/` folder is publish
 ## Monorepo Layout
 
 - `apps/web`: API routes, mode UX, and app entry surface
-- `packages/domain`: publishable deterministic game package (`@twobitedd/ergo-games-interface`)
+- `packages/domain`: deterministic game rules and shared contracts; published as `@twobitedd/ergo-games-interface`
 - `packages/db`: persistence schema and data-access stubs
 - `packages/services`: settlement and wallet service seams
 - `docs`: adoption, delivery, compliance, and operations documentation

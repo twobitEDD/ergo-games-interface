@@ -15,7 +15,7 @@
     "check": "npm run lint && npm run test && npm run build"
   },
   "dependencies": {
-    "@twobitedd/ergo-account-model": "^0.1.1"
+    "@twobitedd/ergo-account-model": "^0.4.1"
   },
   "devDependencies": {
     "tsx": "^4.21.0"

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@twobitedd/ergo-games-interface": "0.1.1",
+    "@twobitedd/ergo-games-interface": "file:../../packages/domain",
     "next": "^15.3.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
